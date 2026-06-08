@@ -1,0 +1,493 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+/* ============================================
+   EMPLOIS DUBAÏ — DESIGN SYSTEM
+   Dark Luxury Theme
+   Version: 2.0
+   ============================================ */
+
+@theme {
+  /* Brand Colors - Optimisé pour meilleur contraste */
+  --color-brand-black: #0a0a0a;
+  --color-brand-dark: #111111;
+  --color-brand-charcoal: #1a1a1a;
+  --color-brand-gold: #c9a96e;
+  --color-brand-gold-light: #d4b97a;
+  --color-brand-gold-dark: #b8954f;
+  --color-brand-silver: #c0c0c0;
+  --color-brand-cream: #f5f0e8;
+  
+  /* Couleurs fonctionnelles */
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: rgba(224, 224, 224, 0.7);
+
+  /* Typography - Fallbacks améliorés */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Spacing overrides - Meilleure gestion responsive */
+  --spacing-hero: min(100vh, 900px);
+  
+  /* Espacements additionnels */
+  --spacing-safe-top: env(safe-area-inset-top);
+  --spacing-safe-bottom: env(safe-area-inset-bottom);
+
+  /* Animation tokens */
+  --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-fade-in: fadeIn 0.6s ease-out forwards;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 3s ease-in-out infinite;
+  --animate-gradient-shift: gradientShift 6s ease infinite;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS - Optimisées GPU
+   ============================================ */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translate3d(0, 30px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 110, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(201, 169, 110, 0.35); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes kenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-1%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+
+.animate-ken-burns {
+  animation: kenBurns 40s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* ============================================
+   BASE / RESET - Modernisé
+   ============================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-brand-black);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  line-height: 1.7;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ============================================
+   TYPOGRAPHIE
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+::selection {
+  background-color: rgba(201, 169, 110, 0.3);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background-color: rgba(201, 169, 110, 0.3);
+  color: #ffffff;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-brand-black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(201, 169, 110, 0.4);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 169, 110, 0.7);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 169, 110, 0.4) var(--color-brand-black);
+  }
+}
+
+/* ============================================
+   GLASSMORPHISM NAVBAR
+   ============================================ */
+.glass-navbar {
+  background: rgba(10, 10, 10, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+.glass-navbar-scrolled {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+  .glass-navbar { background: rgba(10, 10, 10, 0.95); }
+  .glass-navbar-scrolled { background: rgba(10, 10, 10, 0.98); }
+}
+
+/* ============================================
+   CTA BUTTON EFFECTS
+   ============================================ */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cta-button:focus-visible {
+  outline: 2px solid var(--color-brand-gold);
+  outline-offset: 2px;
+  transform: translateY(-1px);
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 169, 110, 0.25), 0 0 40px rgba(201, 169, 110, 0.1);
+}
+
+.cta-button:active {
+  transform: translateY(1px);
+  transition: transform 0.1s ease;
+}
+
+/* ============================================
+   HERO OVERLAY GRADIENT
+   ============================================ */
+.hero-overlay {
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0.6) 40%, rgba(10, 10, 10, 0.85) 75%, rgba(10, 10, 10, 1) 100%);
+  pointer-events: none;
+}
+
+/* ============================================
+   GOLD TEXT GRADIENT
+   ============================================ */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-brand-gold) 0%, #e8d5a3 25%, var(--color-brand-gold) 50%, var(--color-brand-gold-dark) 75%, var(--color-brand-gold) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: var(--animate-gradient-shift);
+  
+  @supports not (background-clip: text) {
+    color: var(--color-brand-gold);
+  }
+}
+
+/* ============================================
+   SEPARATOR LINE
+   ============================================ */
+.gold-separator {
+  width: 60px;
+  max-width: 20vw;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-brand-gold), var(--color-brand-gold-light), var(--color-brand-gold), transparent);
+  border: none;
+  margin: 1rem auto;
+}
+
+.gold-separator-vertical {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent, var(--color-brand-gold), transparent);
+}
+
+/* ============================================
+   NAV LINK HOVER EFFECT
+   ============================================ */
+.nav-link {
+  position: relative;
+  color: var(--color-text-secondary);
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-brand-gold);
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--color-brand-gold);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* ============================================
+   CLASSES UTILITAIRES SUPPLEMENTAIRES
+   ============================================ */
+.container-premium {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .container-premium {
+    padding: 0 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.shimmer-loading {
+  background: linear-gradient(90deg, var(--color-brand-charcoal) 0%, var(--color-brand-gold-dark) 50%, var(--color-brand-charcoal) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   CUSTOM CLASSES FOR LEGAL PAGES LAYOUT
+   ============================================ */
+.legal-container {
+  padding-top: 14rem !important;
+  padding-bottom: 6rem !important;
+  max-width: 48rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  text-align: left !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+.legal-title {
+  font-family: var(--font-playfair), "Playfair Display", serif !important;
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin-bottom: 1.5rem !important;
+  border-bottom: 1px solid #27272a !important;
+  padding-bottom: 1.5rem !important;
+  line-height: 1.1 !important;
+}
+
+.legal-section-title {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: #e4e4e7 !important;
+  margin-bottom: 0.75rem !important;
+  margin-top: 2rem !important;
+}
+
+.legal-text {
+  color: #a1a1aa !important;
+  line-height: 1.625 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* ============================================
+   SWIPER CUSTOM PAGINATION (Import/Export Carousel)
+   ============================================ */
+.custom-swiper-pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.custom-pagination-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.custom-pagination-bullet-active {
+  width: 24px;
+  height: 6px;
+  border-radius: 3px;
+  background: #c9a96e;
+}
+
+/* Swiper Custom Pagination Bullet overrides for white bg */
+.bg-white .custom-pagination-bullet {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+.bg-white .custom-pagination-bullet-active {
+  background: #18181b !important;
+}
+
+/* ============================================
+   APPLE-STYLE CAROUSEL
+   ============================================ */
+/* Centering and resetting Swiper Pagination Containers */
+.ie-pg,
+.ie-pg-bottom {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: auto !important;
+  height: auto !important;
+  inset: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  left: auto !important;
+  bottom: auto !important;
+}
+
+/* Overriding Swiper bullet styles */
+.ie-pg .swiper-pagination-bullet,
+.ie-pg-bottom .swiper-pagination-bullet {
+  display: inline-block !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  margin: 0 !important;
+}
+
+.ie-pg .swiper-pagination-bullet:hover,
+.ie-pg-bottom .swiper-pagination-bullet:hover {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.ie-pg .swiper-pagination-bullet-active,
+.ie-pg-bottom .swiper-pagination-bullet-active {
+  width: 28px !important;
+  height: 8px !important;
+  border-radius: 4px !important;
+  background: #1d1d1f !important;
+}
+
+/* Service cards hover & scrollbar helpers */
+.apple-service-card:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.14);
+}
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Responsive bottom grid */
+@media (max-width: 768px) {
+  .apple-bottom-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 480px) {
+  .apple-bottom-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Apple-style pagination bar filling animation */
+@keyframes progressFill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-progress-fill {
+  animation: progressFill 3000ms linear forwards;
+}
