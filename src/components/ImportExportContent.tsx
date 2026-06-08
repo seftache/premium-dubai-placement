@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 /* ============================================
    TYPES & DATA STRUCTURES
@@ -30,7 +31,7 @@ const SERVICES_DATA: ServiceCardData[] = [
     title: "Véhicules & Engins",
     subtitle: "Achat & Expédition sécurisée",
     desc: "Sourcing direct en concession, inspection technique rigoureuse à Dubaï et acheminement maritime sécurisé (Ro-Ro ou conteneur) vers l'Afrique.",
-    image: "/industrie.png",
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
     details: ["Achat direct concessions & en-can", "Rapports techniques certifiés", "Arrimage et fret maritime sécurisé"],
     hotspots: [
       { id: "v1", top: "30%", left: "25%", label: "Achat en concession & Négociation directe" },
@@ -43,7 +44,7 @@ const SERVICES_DATA: ServiceCardData[] = [
     title: "Mode & Prêt-à-porter",
     subtitle: "Sourcing & Groupage en volume",
     desc: "Accédez aux meilleurs grossistes de Dubaï pour le prêt-à-porter, chaussures et accessoires. Nous gérons le contrôle qualité et l'envoi express.",
-    image: "/luxe.png",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
     details: ["Sourcing grossistes exclusifs", "Contrôle qualité rigoureux", "Colisage & Groupage optimisé"],
     hotspots: [
       { id: "m1", top: "20%", left: "30%", label: "Sourcing direct grossistes & Marques émiraties" },
@@ -56,7 +57,7 @@ const SERVICES_DATA: ServiceCardData[] = [
     title: "Logistique & Fret",
     subtitle: "Transit global & Douanes",
     desc: "Solutions de conteneurs complets (FCL), de groupage maritime (LCL) et de fret aérien quotidien. Prise en charge intégrale des formalités émiraties.",
-    image: "/dubai-port-trading.png",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
     details: ["Conteneurs FCL / LCL", "Fret aérien express quotidien", "Dédouanement export Dubaï"],
     hotspots: [
       { id: "l1", top: "35%", left: "35%", label: "Transit maritime direct & Fret aérien quotidien" },
@@ -70,7 +71,7 @@ interface Destination {
   id: string;
   name: string;
   coords: { x: number; y: number };
-  pathQ: string; // Quadratic curve control points
+  pathQ: string;
   times: {
     maritime_roro: string;
     maritime_container: string;
@@ -168,6 +169,8 @@ interface UniverseData {
   desc: string;
   imageSrc: string;
   videoSrc?: string;
+  videoId: string;
+  link: string;
   category: string;
 }
 
@@ -179,6 +182,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Sourcing parcs informatiques & puces GPU",
     desc: "Ordinateurs de pointe, serveurs de calcul, puces graphiques IA et matériel technologique de dernière génération sourcés auprès de distributeurs agréés.",
     imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80",
+    videoId: "R9K-H_vH4wM",
+    link: "/import-export/electronique",
     category: "L'UNIVERS HIGH-TECH"
   },
   {
@@ -189,6 +194,8 @@ const UNIVERSES: UniverseData[] = [
     desc: "Achat et transport sécurisé de supercars, véhicules de sport et SUV de luxe depuis les concessions émiraties de Jebel Ali et Ras Al Khor.",
     imageSrc: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=2000&q=80",
     videoSrc: "https://assets.mixkit.co/videos/preview/mixkit-sports-car-driving-on-a-highway-41680-large.mp4",
+    videoId: "kY-FhF3Kq_4",
+    link: "/import-export/automobile",
     category: "L'UNIVERS AUTOMOBILE"
   },
   {
@@ -198,6 +205,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Dispositifs critiques & robots médicaux",
     desc: "Sourcing international de matériel d'imagerie clinique, robotique chirurgicale de pointe et consommables stérilisés aux normes européennes.",
     imageSrc: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=2000&q=80",
+    videoId: "K3uH1kXzXQc",
+    link: "/import-export/medical",
     category: "L'UNIVERS MÉDICAL"
   },
   {
@@ -207,6 +216,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Sourcing tissus nobles & prêt-à-porter de marque",
     desc: "Accès privilégié aux grossistes textiles émiratis. Contrôle qualité rigoureux et colisage étanche pour l'expédition de mode en gros.",
     imageSrc: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=2000&q=80",
+    videoId: "VjV1u1-d5k0",
+    link: "/import-export/fashion",
     category: "L'UNIVERS MODE"
   },
   {
@@ -215,8 +226,10 @@ const UNIVERSES: UniverseData[] = [
     title: "Vélocité Mécanique",
     subtitle: "Moteurs & pièces critiques d'urgence",
     desc: "Transit aérien express de pièces détachées d'origine aéronautique, automobile et pour engins de chantier lourds afin de réduire vos arrêts techniques.",
-    imageSrc: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=2000&q=80",
+    imageSrc: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=2000&q=80",
     videoSrc: "https://assets.mixkit.co/videos/preview/mixkit-close-up-of-mechanical-clockwork-gears-moving-41644-large.mp4",
+    videoId: "AjDKsPznQ_s",
+    link: "/import-export/rechange",
     category: "L'UNIVERS MÉCANIQUE"
   },
   {
@@ -226,6 +239,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Turbines de puissance & lignes industrielles",
     desc: "Achat et logistique exceptionnelle de générateurs électriques lourds, transformateurs de puissance et bras d'usinage industriels automatisés.",
     imageSrc: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2000&q=80",
+    videoId: "wX-y8G-h7E0",
+    link: "/import-export/industrie",
     category: "L'UNIVERS INDUSTRIEL"
   },
   {
@@ -234,7 +249,9 @@ const UNIVERSES: UniverseData[] = [
     title: "Alchimie & Beauté",
     subtitle: "Fragrances de luxe & soins esthétiques",
     desc: "Sourcing direct en laboratoire émirati et expédition express sécurisée de parfums nobles, soins dermatologiques et alchimies de beauté.",
-    imageSrc: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2000&q=80",
+    imageSrc: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=2000&q=80",
+    videoId: "51wc_LD3mEU",
+    link: "/import-export/cosmetics",
     category: "L'UNIVERS COSMÉTIQUE"
   },
   {
@@ -244,6 +261,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Marbres précieux & céramiques d'art",
     desc: "Importation en gros de marbres de Carrare, essences de bois d'ébénisterie et revêtements en grès cérame pour l'architecture résidentielle VIP.",
     imageSrc: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
+    videoId: "9g2g4R7Qz6A",
+    link: "/import-export/nobles",
     category: "L'UNIVERS ARCHITECTURE"
   },
   {
@@ -253,6 +272,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Transit agroalimentaire à humidité contrôlée",
     desc: "Sourcing et expédition de café vert, épices rares et denrées alimentaires sèches. Traçabilité complète et emballage hermétique.",
     imageSrc: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=2000&q=80",
+    videoId: "z7gAp8WdjRi",
+    link: "/import-export/alimentation",
     category: "L'UNIVERS ALIMENTAIRE"
   },
   {
@@ -262,6 +283,8 @@ const UNIVERSES: UniverseData[] = [
     subtitle: "Panneaux photovoltaïques & accumulateurs",
     desc: "Sourcing de systèmes solaires complets, onduleurs intelligents et cellules de stockage au lithium pour alimenter vos projets d'énergie durable.",
     imageSrc: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=2000&q=80",
+    videoId: "lZZx88ziqbM",
+    link: "/import-export/energie",
     category: "L'UNIVERS ÉNERGIE"
   }
 ];
@@ -311,9 +334,8 @@ function MagneticButton({
   );
 }
 
-
 /* ============================================
-   UNIVERSE PANEL COMPONENT (AWWWARDS STACK)
+   UNIVERSE PANEL COMPONENT
    ============================================ */
 function UniversePanel({
   universe,
@@ -322,6 +344,7 @@ function UniversePanel({
   universe: UniverseData;
   index: number;
 }) {
+  const router = useRouter();
   const panelRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -329,13 +352,15 @@ function UniversePanel({
     offset: ["start end", "end start"]
   });
 
-  // Parallax Y shifts for background visual
   const yBg = useTransform(scrollYProgress, [0, 1], [-120, 120]);
 
-  // Entrance, lock, and exit animations for text overlay card
   const opacityText = useTransform(scrollYProgress, [0.15, 0.45, 0.55, 0.85], [0, 1, 1, 0]);
   const scaleText = useTransform(scrollYProgress, [0.15, 0.45, 0.55, 0.85], [0.85, 1, 1, 0.85]);
   const yText = useTransform(scrollYProgress, [0.15, 0.45, 0.55, 0.85], [70, 0, 0, -70]);
+
+  const handleClick = () => {
+    router.push(universe.link);
+  };
 
   return (
     <div
@@ -343,8 +368,10 @@ function UniversePanel({
       className="relative h-screen w-full"
       style={{ zIndex: index * 10 + 10 }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#fafafc]">
-        {/* Background Visual Layer */}
+      <div
+        onClick={handleClick}
+        className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#fafafc] cursor-pointer group"
+      >
         <div className="absolute inset-0 z-0">
           <motion.div style={{ y: yBg }} className="absolute -inset-y-36 inset-x-0">
             {universe.videoSrc ? (
@@ -368,18 +395,16 @@ function UniversePanel({
               />
             )}
           </motion.div>
-          {/* Glass layout overlays */}
           <div className="absolute inset-0 bg-white/10" />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/50 to-transparent" />
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white via-white/20 to-transparent" />
         </div>
 
-        {/* Text Container Card */}
         <motion.div
           style={{ opacity: opacityText, scale: scaleText, y: yText }}
-          className="relative z-10 w-full max-w-4xl px-6 flex justify-center"
+          className="relative z-10 w-full max-w-4xl px-6 flex justify-center pointer-events-none"
         >
-          <div className="bg-white/80 backdrop-blur-xl border border-zinc-200/60 rounded-[32px] p-10 sm:p-14 shadow-2xl shadow-zinc-200/30 text-center max-w-3xl w-full">
+          <div className="bg-white/80 backdrop-blur-xl border border-zinc-200/60 rounded-[32px] p-10 sm:p-14 shadow-2xl shadow-zinc-200/30 text-center max-w-3xl w-full group-hover:shadow-[0_30px_80px_rgba(201,169,110,0.15)] transition-shadow duration-500">
             <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#b8860b] uppercase block mb-4">
               {universe.category} • {universe.num} / 10
             </span>
@@ -390,7 +415,7 @@ function UniversePanel({
             <p className="font-sans text-sm sm:text-base text-zinc-700 leading-relaxed font-light mb-8 max-w-xl mx-auto">
               {universe.desc}
             </p>
-            <span className="text-xs font-sans font-semibold text-[#b8860b] tracking-wider uppercase border border-[#c9a96e]/40 rounded-full px-6 py-2.5 bg-[#c9a96e]/5 hover:bg-[#c9a96e]/10 transition-colors duration-300">
+            <span className="text-xs font-sans font-semibold text-[#b8860b] tracking-wider uppercase border border-[#c9a96e]/40 rounded-full px-6 py-2.5 bg-[#c9a96e]/5 group-hover:bg-[#c9a96e]/10 transition-colors duration-300">
               {universe.subtitle} ➔
             </span>
           </div>
@@ -401,14 +426,23 @@ function UniversePanel({
 }
 
 /* ============================================
+   GOLD SEPARATOR (réutilisable)
+   ============================================ */
+function GoldSeparator({ className = "" }: { className?: string }) {
+  return (
+    <div className={`h-[2px] w-24 bg-gradient-to-r from-transparent via-[#c9a96e] to-transparent ${className}`} />
+  );
+}
+
+/* ============================================
    MAIN COMPONENT
    ============================================ */
 export function ImportExportContent() {
+  const router = useRouter();
   const heroRef = useRef<HTMLDivElement>(null);
   const bentoRef = useRef<HTMLDivElement>(null);
   const simulatorRef = useRef<HTMLDivElement>(null);
 
-  // Hero Scroll Parallax values
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -418,17 +452,14 @@ export function ImportExportContent() {
   const heroTextY = useTransform(heroScroll, [0, 1], ["0%", "50%"]);
   const heroTextOpacity = useTransform(heroScroll, [0, 0.75], [1, 0]);
 
-  // Page Scroll for Tracking Lines
   const { scrollYProgress: pageScroll } = useScroll();
   const trackingLineWidth1 = useTransform(pageScroll, [0.05, 0.45], ["0%", "100%"]);
   const trackingLineWidth2 = useTransform(pageScroll, [0.4, 0.85], ["0%", "100%"]);
 
-  // Simulator States
   const [activeCargo, setActiveCargo] = useState<string>("vehicules");
   const [activeDest, setActiveDest] = useState<string>("dakar");
   const [activeMode, setActiveMode] = useState<string>("maritime_roro");
 
-  // Auto-adjust default recommended shipping mode based on selected cargo
   const handleCargoChange = (cargoId: string) => {
     setActiveCargo(cargoId);
     if (cargoId === "vehicules") {
@@ -440,12 +471,10 @@ export function ImportExportContent() {
     }
   };
 
-  // Retrieve current simulator data objects
   const currentDest = DESTINATIONS.find((d) => d.id === activeDest) || DESTINATIONS[0];
   const currentCargo = SERVICES_DATA.find((c) => c.id === activeCargo) || SERVICES_DATA[0];
   const currentMode = MODES.find((m) => m.id === activeMode) || MODES[0];
 
-  // Dynamic transit time retrieval
   const computedTime =
     activeMode === "maritime_roro"
       ? currentDest.times.maritime_roro
@@ -453,7 +482,6 @@ export function ImportExportContent() {
       ? currentDest.times.maritime_container
       : currentDest.times.aerien;
 
-  // WhatsApp prefilled link
   const formattedMsg = encodeURIComponent(
     `Bonjour Lou Trading & Logistics. J'ai effectué une simulation pour un projet d'importation depuis Dubaï :\n` +
       `- Cargaison : ${currentCargo.title}\n` +
@@ -463,12 +491,10 @@ export function ImportExportContent() {
   );
   const whatsappUrl = `https://wa.me/971526252539?text=${formattedMsg}`;
 
-  // Smooth scroll handler
   const handleScrollToSimulator = () => {
     simulatorRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Word-by-word reveal configurations
   const titleText = "TOUT IMPORTER. SANS LIMITE.";
   const titleWords = titleText.split(" ");
   const wordContainer = {
@@ -485,13 +511,13 @@ export function ImportExportContent() {
   return (
     <div className="relative min-h-screen bg-[#fafafc] text-zinc-950 overflow-hidden selection:bg-[#c9a96e]/20 selection:text-zinc-900">
       
-      {/* Background Grids & Vector Lighting */}
+      {/* Background ambiance */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(201,169,110,0.08),rgba(250,250,252,0))]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.015)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none opacity-40" />
 
-      {/* ──────────────────────────────────────────────────────────
-          1. HERO SECTION ("The Global Pipeline") - LIGHT LUXURY
-          ────────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════
+          HERO SECTION
+          ═══════════════════════════════════════════ */}
       <section
         ref={heroRef}
         className="relative h-[98vh] min-h-[720px] w-full flex items-center justify-center overflow-hidden z-10"
@@ -502,26 +528,23 @@ export function ImportExportContent() {
         >
           <Image
             src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=2000&q=80"
-            alt="Port logistique global et conteneurs sous le soleil"
+            alt="Port logistique global et conteneurs"
             fill
             className="object-cover object-center brightness-[1.08] contrast-[0.98]"
             sizes="100vw"
             priority
           />
-          {/* Glass overlay filter & gradient transition to cream-white page background */}
           <div className="absolute inset-0 bg-white/20" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#fafafc]/60 to-[#fafafc]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#fafafc]/80 via-transparent to-[#fafafc]/10" />
         </motion.div>
 
-        {/* Ambient Warm Golden Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#c9a96e]/10 blur-[130px] rounded-full pointer-events-none" />
 
         <motion.div
           style={{ y: heroTextY, opacity: heroTextOpacity }}
           className="relative z-10 text-center max-w-5xl mx-auto px-6 mt-12 flex flex-col items-center"
         >
-          {/* Gigantic dark H1 with word reveal mask */}
           <motion.h1
             variants={wordContainer}
             initial="hidden"
@@ -547,7 +570,6 @@ export function ImportExportContent() {
             className="h-[2px] bg-gradient-to-r from-transparent via-[#c9a96e] to-transparent mb-8"
           />
 
-          {/* Luxury descriptive subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -557,7 +579,6 @@ export function ImportExportContent() {
             Matériel technologique de pointe, véhicules de prestige, fret industriel ou logistique d&apos;urgence. Une infrastructure globale de transport connectant les Émirats arabes unis à l&apos;Afrique, en pleine lumière.
           </motion.p>
 
-          {/* Magnetic CTA button */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -569,7 +590,6 @@ export function ImportExportContent() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-60 z-10 pointer-events-none">
           <span className="text-[9px] font-sans tracking-[0.3em] text-[#b8860b] uppercase">Explorer</span>
           <motion.div
@@ -588,12 +608,10 @@ export function ImportExportContent() {
         />
       </div>
 
-      {/* ──────────────────────────────────────────────────────────
-          2. THE 10-CARD STICKY PARALLAX STACK SHOWCASE (AWWWARDS)
-          ────────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════
+          10 UNIVERSE STICKY PARALLAX STACK
+          ═══════════════════════════════════════════ */}
       <section ref={bentoRef} className="relative z-20">
-
-        {/* Stack wrapper */}
         <div className="relative">
           {UNIVERSES.map((uni, idx) => (
             <UniversePanel
@@ -613,9 +631,9 @@ export function ImportExportContent() {
         />
       </div>
 
-      {/* ──────────────────────────────────────────────────────────
-          3. INTERACTIVE SIMULATOR (Polished Light-Theme)
-          ────────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════
+          SIMULATEUR INTERACTIF REPENSÉ
+          ═══════════════════════════════════════════ */}
       <section
         ref={simulatorRef}
         id="simulator"
@@ -623,27 +641,29 @@ export function ImportExportContent() {
       >
         <div className="max-w-[1300px] mx-auto">
           
+          {/* En-tête centré */}
           <div className="text-center mb-20">
-            <span className="mb-4 inline-block text-[11px] font-sans font-semibold tracking-[0.3em] uppercase text-[#b8860b]">
+            <span className="mb-4 inline-block text-[11px] font-sans font-bold tracking-[0.3em] uppercase text-[#b8860b]">
               Outil Interactif
             </span>
             <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-950 mb-6">
               Estimez votre logistique.
             </h2>
-            <div className="gold-separator mx-auto mb-6" />
-            <p className="font-sans text-sm sm:text-base font-light text-zinc-600 max-w-xl mx-auto">
+            <GoldSeparator className="mx-auto mb-6" />
+            <p className="font-sans text-sm sm:text-base font-light text-zinc-600 max-w-xl mx-auto leading-relaxed">
               Sélectionnez vos critères pour tracer le trajet idéal en temps réel et obtenir un devis personnalisé de notre cellule logistique.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Layout : Sélecteurs à gauche, Carte + Résultat à droite */}
+          <div className="flex flex-col lg:flex-row gap-8 items-stretch justify-center">
             
-            {/* Input selectors */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
+            {/* COLONNE GAUCHE : 3 Sélecteurs */}
+            <div className="w-full lg:w-[440px] flex-shrink-0 flex flex-col gap-6">
               
-              {/* Category Selector */}
-              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50">
-                <label className="text-[10px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase mb-4 block">
+              {/* 1. Type de Marchandise */}
+              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50 hover:shadow-lg hover:shadow-zinc-100/80 transition-shadow duration-300">
+                <label className="text-[10px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase mb-5 block">
                   1. Type de Marchandise
                 </label>
                 <div className="flex flex-col gap-3">
@@ -653,23 +673,25 @@ export function ImportExportContent() {
                       onClick={() => handleCargoChange(srv.id)}
                       className={`w-full flex items-center justify-between p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
                         activeCargo === srv.id
-                          ? "border-[#c9a96e] bg-[#c9a96e]/5 text-[#b8860b]"
-                          : "border-zinc-200 bg-zinc-50/50 text-zinc-800 hover:bg-zinc-100"
+                          ? "border-[#c9a96e] bg-[#c9a96e]/5 text-[#b8860b] shadow-[0_0_20px_rgba(201,169,110,0.1)]"
+                          : "border-zinc-200 bg-zinc-50/50 text-zinc-800 hover:bg-zinc-100 hover:border-zinc-300"
                       }`}
                     >
                       <div>
                         <span className="block text-sm font-semibold">{srv.title}</span>
                         <span className="block text-[11px] font-sans font-light text-zinc-500 mt-0.5">{srv.subtitle}</span>
                       </div>
-                      <span className="text-lg">{srv.id === "vehicules" ? "🚗" : srv.id === "mode" ? "🛍️" : "📦"}</span>
+                      <span className="text-lg">
+                        {srv.id === "vehicules" ? "🚗" : srv.id === "mode" ? "🛍️" : "📦"}
+                      </span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Destination Selector */}
-              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50">
-                <label className="text-[10px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase mb-4 block">
+              {/* 2. Destination */}
+              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50 hover:shadow-lg hover:shadow-zinc-100/80 transition-shadow duration-300">
+                <label className="text-[10px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase mb-5 block">
                   2. Destination en Afrique
                 </label>
                 <div className="grid grid-cols-2 gap-3">
@@ -679,8 +701,8 @@ export function ImportExportContent() {
                       onClick={() => setActiveDest(dest.id)}
                       className={`p-3 rounded-xl border text-center transition-all duration-300 text-xs font-semibold cursor-pointer ${
                         activeDest === dest.id
-                          ? "border-[#c9a96e] bg-[#c9a96e]/5 text-[#b8860b]"
-                          : "border-zinc-200 bg-zinc-50/50 text-zinc-600 hover:bg-zinc-100"
+                          ? "border-[#c9a96e] bg-[#c9a96e]/5 text-[#b8860b] shadow-[0_0_20px_rgba(201,169,110,0.1)]"
+                          : "border-zinc-200 bg-zinc-50/50 text-zinc-600 hover:bg-zinc-100 hover:border-zinc-300"
                       }`}
                     >
                       {dest.name}
@@ -689,9 +711,9 @@ export function ImportExportContent() {
                 </div>
               </div>
 
-              {/* Mode Selector */}
-              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50">
-                <label className="text-[10px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase mb-4 block">
+              {/* 3. Mode de Transport */}
+              <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50 hover:shadow-lg hover:shadow-zinc-100/80 transition-shadow duration-300">
+                <label className="text-[10px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase mb-5 block">
                   3. Mode de Transport
                 </label>
                 <div className="flex flex-col gap-3">
@@ -701,8 +723,8 @@ export function ImportExportContent() {
                       onClick={() => setActiveMode(mode.id)}
                       className={`w-full flex items-center gap-4 p-3.5 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
                         activeMode === mode.id
-                          ? "border-[#c9a96e] bg-[#c9a96e]/5 text-[#b8860b]"
-                          : "border-zinc-200 bg-zinc-50/50 text-zinc-700 hover:bg-zinc-100"
+                          ? "border-[#c9a96e] bg-[#c9a96e]/5 text-[#b8860b] shadow-[0_0_20px_rgba(201,169,110,0.1)]"
+                          : "border-zinc-200 bg-zinc-50/50 text-zinc-700 hover:bg-zinc-100 hover:border-zinc-300"
                       }`}
                     >
                       <span className="text-xl">{mode.icon}</span>
@@ -717,20 +739,19 @@ export function ImportExportContent() {
 
             </div>
 
-            {/* Visual Vector SVG Map & Results */}
-            <div className="lg:col-span-7 flex flex-col gap-6">
+            {/* COLONNE DROITE : Carte SVG + Résultat */}
+            <div className="flex-1 flex flex-col gap-6 min-w-0">
               
-              {/* Map Card */}
-              <div className="rounded-2xl border border-zinc-200 bg-zinc-100/40 p-6 flex flex-col justify-between relative overflow-hidden h-[340px] sm:h-[400px] shadow-inner">
+              {/* Carte SVG */}
+              <div className="rounded-2xl border border-zinc-200 bg-zinc-100/40 p-6 flex flex-col justify-between relative overflow-hidden h-[380px] sm:h-[440px] shadow-inner">
                 
-                {/* World Map Background SVG */}
-                <div className="absolute inset-0 z-0 flex items-center justify-center p-4">
+                <div className="absolute inset-0 z-0 flex items-center justify-center p-6">
                   <svg
                     viewBox="0 0 360 320"
                     fill="none"
-                    className="w-full h-full object-contain max-h-[320px] opacity-90"
+                    className="w-full h-full object-contain max-h-[350px] opacity-90"
                   >
-                    {/* Stylized Landmass grid dots */}
+                    {/* Points de repère géographiques stylisés */}
                     <circle cx="50" cy="180" r="1.5" fill="#1d1d1f" opacity="0.06" />
                     <circle cx="80" cy="200" r="1.5" fill="#1d1d1f" opacity="0.06" />
                     <circle cx="120" cy="220" r="1.5" fill="#1d1d1f" opacity="0.06" />
@@ -743,24 +764,27 @@ export function ImportExportContent() {
                     <circle cx="285" cy="85" r="1.5" fill="#1d1d1f" opacity="0.06" />
                     <circle cx="310" cy="70" r="1.5" fill="#1d1d1f" opacity="0.06" />
                     
-                    {/* Dynamic Vector Curves */}
+                    {/* Routes maritimes */}
                     {DESTINATIONS.map((dest) => {
                       const isSelected = dest.id === activeDest;
                       return (
                         <g key={dest.id}>
+                          {/* Ligne de fond (toutes les destinations) */}
                           <path
                             d={dest.pathQ}
-                            stroke={isSelected ? "#b8860b" : "rgba(0,0,0,0.05)"}
+                            stroke={isSelected ? "#b8860b" : "rgba(0,0,0,0.04)"}
                             strokeWidth={isSelected ? 2 : 1}
                             strokeDasharray={isSelected ? "none" : "3,3"}
                             className="transition-all duration-500"
                           />
+                          {/* Animation de tracé pour la destination sélectionnée */}
                           {isSelected && (
                             <motion.path
                               d={dest.pathQ}
                               stroke="#b8860b"
                               strokeWidth={2.5}
                               strokeLinecap="round"
+                              fill="none"
                               initial={{ pathLength: 0 }}
                               animate={{ pathLength: 1 }}
                               transition={{ duration: 1.2, ease: "easeInOut" }}
@@ -770,27 +794,41 @@ export function ImportExportContent() {
                       );
                     })}
 
-                    {/* Jebel Ali / Dubai hub marker */}
+                    {/* Hub Dubaï */}
                     <g transform="translate(300, 80)">
-                      <circle r="8" fill="rgba(201,169,110,0.25)" className="animate-pulse" />
-                      <circle r="4" fill="#b8860b" />
-                      <text x="12" y="4" fill="#b8860b" className="text-[7.5px] font-sans font-bold tracking-wider" opacity="0.9">DUBAÏ</text>
+                      <circle r="9" fill="rgba(201,169,110,0.2)" className="animate-pulse" />
+                      <circle r="5" fill="#b8860b" />
+                      <circle r="2" fill="#1d1d1f" />
+                      <text x="14" y="5" fill="#b8860b" className="text-[8px] font-sans font-bold tracking-wider" opacity="0.9">DUBAÏ</text>
                     </g>
 
-                    {/* Selected destination coordinates */}
+                    {/* Destinations avec marqueurs */}
                     {DESTINATIONS.map((dest) => {
                       const isSelected = dest.id === activeDest;
-                      if (!isSelected) return null;
                       return (
                         <g key={dest.id} transform={`translate(${dest.coords.x}, ${dest.coords.y})`}>
-                          <circle r="10" fill="rgba(201,169,110,0.25)" className="animate-ping" />
-                          <circle r="4.5" fill="#b8860b" />
-                          <text x="10" y="4" fill="#b8860b" className="text-[7.5px] font-sans font-bold tracking-wider">{dest.name.split(" ")[0].toUpperCase()}</text>
+                          {isSelected ? (
+                            <>
+                              <circle r="11" fill="rgba(201,169,110,0.2)" className="animate-ping" />
+                              <circle r="5" fill="#b8860b" />
+                              <circle r="2" fill="white" />
+                              <text x="12" y="5" fill="#b8860b" className="text-[8px] font-sans font-bold tracking-wider">
+                                {dest.name.split(" ")[0].toUpperCase()}
+                              </text>
+                            </>
+                          ) : (
+                            <>
+                              <circle r="3" fill="rgba(0,0,0,0.15)" />
+                              <text x="10" y="4" fill="rgba(0,0,0,0.3)" className="text-[7px] font-sans font-medium">
+                                {dest.name.split(" ")[0].toUpperCase()}
+                              </text>
+                            </>
+                          )}
                         </g>
                       );
                     })}
 
-                    {/* Moving cargo vector dash */}
+                    {/* Point mobile qui suit la route active */}
                     {activeDest && (
                       <g>
                         <path
@@ -799,7 +837,7 @@ export function ImportExportContent() {
                           fill="none"
                           stroke="none"
                         />
-                        <circle r="3.5" fill="#1d1d1f" className="shadow-[0_0_8px_rgba(0,0,0,0.5)]">
+                        <circle r="4" fill="#1d1d1f" className="drop-shadow-[0_0_6px_rgba(0,0,0,0.4)]">
                           <animateMotion dur="6s" repeatCount="indefinite">
                             <mpath href="#active-transit-path" />
                           </animateMotion>
@@ -809,7 +847,8 @@ export function ImportExportContent() {
                   </svg>
                 </div>
 
-                <div className="relative z-10 w-full flex items-center justify-between mt-auto">
+                {/* Badge en bas de la carte */}
+                <div className="relative z-10 w-full flex items-center justify-between mt-auto pt-4 border-t border-zinc-200/60">
                   <span className="text-[9px] font-sans tracking-[0.2em] font-semibold text-zinc-400 uppercase">
                     Lou Trading Route Optimization
                   </span>
@@ -818,10 +857,9 @@ export function ImportExportContent() {
                     <span className="text-[9px] font-sans text-emerald-600 font-bold tracking-wider uppercase">Ligne active</span>
                   </div>
                 </div>
-
               </div>
 
-              {/* Transit Info Result Card */}
+              {/* Résultat Simulation */}
               <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-md shadow-zinc-100/50">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                   <div>
@@ -847,6 +885,21 @@ export function ImportExportContent() {
                     </div>
                   </div>
                 </div>
+
+                {/* Bouton WhatsApp dans le résultat */}
+                <div className="mt-6 pt-5 border-t border-zinc-100 flex justify-end">
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 rounded-full bg-[#c9a96e] px-6 py-2.5 text-[10px] font-sans font-bold tracking-[0.15em] uppercase text-zinc-950 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(201,169,110,0.35)] cursor-pointer"
+                  >
+                    Obtenir un devis
+                    <svg className="h-3 w-3 text-zinc-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                </div>
               </div>
 
             </div>
@@ -856,10 +909,10 @@ export function ImportExportContent() {
         </div>
       </section>
 
-      {/* ──────────────────────────────────────────────────────────
-          5. CTA BLOCK
-          ────────────────────────────────────────────────────────── */}
-      <section className="relative z-20 pt-28 pb-28 sm:pt-36 sm:pb-36 px-6">
+      {/* ═══════════════════════════════════════════
+          CTA BLOCK
+          ═══════════════════════════════════════════ */}
+      <section className="relative z-20 pt-20 pb-28 sm:pt-28 sm:pb-36 px-6">
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[450px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c9a96e]/10 blur-[150px]" aria-hidden="true" />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -868,7 +921,7 @@ export function ImportExportContent() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-[32px] border border-zinc-200 bg-white p-10 sm:p-18 shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
+            className="rounded-[32px] border border-zinc-200 bg-white p-10 sm:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.06)]"
           >
             <span className="mb-4 inline-block text-[9px] font-sans font-bold tracking-[0.35em] uppercase text-[#b8860b]">
               Division Fret International
@@ -876,7 +929,7 @@ export function ImportExportContent() {
             <h2 className="font-serif text-3xl sm:text-5xl font-semibold tracking-tight text-[#1d1d1f] mb-6 leading-tight">
               Prêt à lancer votre projet ?
             </h2>
-            <div className="gold-separator mx-auto mb-6" />
+            <GoldSeparator className="mx-auto mb-6" />
             <p className="font-sans text-sm sm:text-base font-light text-zinc-600 max-w-xl mx-auto mb-12 leading-relaxed">
               Consultez un logisticien Lou Trading pour chiffrer précisément votre transport et recevoir une offre commerciale personnalisée en moins de 24h.
             </p>
@@ -897,7 +950,6 @@ export function ImportExportContent() {
         </div>
       </section>
 
-      {/* Spacing container to separate the CTA card from the black footer */}
       <div className="h-16 sm:h-28 w-full bg-[#fafafc] relative z-20" />
 
     </div>
