@@ -6,16 +6,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const UNIVERSE_PAGES: Record<string, { title: string; videoId: string; subject: string }> = {
-  electronique: { title: "Silicium & Intelligence", videoId: "sJsATGnTPtk", subject: "ordinateurs et matériel électronique" },
+  electronique: { title: "Électronique & High-Tech", videoId: "sJsATGnTPtk", subject: "ordinateurs et matériel électronique" },
   automobile: { title: "Hypercars & Vitesse", videoId: "bWlgfsU9JJk", subject: "véhicules et automobiles" },
-  medical: { title: "Photonique & Santé", videoId: "K3uH1kXzXQc", subject: "équipements médicaux" },
-  fashion: { title: "Haute Couture & Éclat", videoId: "0es4QImA4pM", subject: "vêtements et haute couture" },
-  rechange: { title: "Vélocité Mécanique", videoId: "AjDKsPznQ_s", subject: "pièces de rechange mécaniques" },
-  industrie: { title: "Robotique & Force", videoId: "wX-y8G-h7E0", subject: "machines industrielles et robotique" },
-  cosmetics: { title: "Alchimie & Beauté", videoId: "0es4QImA4pM", subject: "produits cosmétiques et de beauté" },
-  nobles: { title: "Structure & Matière", videoId: "9g2g4R7Qz6A", subject: "matériaux de construction" },
-  alimentation: { title: "Terroirs & Épices", videoId: "z7gAp8WdjRi", subject: "produits alimentaires" },
-  energie: { title: "Énergie & Hélios", videoId: "lZZx88ziqbM", subject: "équipements liés à l'énergie" },
+  bijoux: { title: "Or & Joaillerie", videoId: "vN8y9BRYRS8", subject: "bijoux et or" },
+  fashion: { title: "Haute Couture & Éclat", videoId: "zp2RlWsgDo0", subject: "vêtements et haute couture" },
+  cafe: { title: "Café de Spécialité", videoId: "lAd3LYIZMjs", subject: "grains de café premium" },
+  meubles: { title: "Meubles & Décoration", videoId: "OsPjZjwqwNQ", subject: "meubles et décoration de luxe" },
+  cosmetics: { title: "Parfums & Cosmétiques", videoId: "vGIm8CPMvls", subject: "produits cosmétiques et parfums" },
+  nobles: { title: "Matériaux de Construction", videoId: "UbINVF7afGc", subject: "matériaux de construction" },
+  alimentation: { title: "Alimentation & Épices", videoId: "hRs54X4WC1M", subject: "épices et alimentation" },
+  energie: { title: "Énergie Solaire", videoId: "UgV4UxPavIw", subject: "équipements solaires" },
 };
 
 const WHATSAPP_NUMBER = "971526252539";

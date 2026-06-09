@@ -10,11 +10,19 @@ import Link from "next/link";
 const HERO_SLIDES = [
   {
     id: "electronique",
-    title: "Silicium &\nIntelligence.",
+    title: "Électronique &\nHigh-Tech.",
     desc: "Importation de serveurs GPU IA, composants électroniques de dernière génération et matériel technologique de pointe.",
-    image: "/images/hero/electronique.png",
+    image: "/images/hightech.png",
     link: "/import-export",
     badge: "Tech & IA",
+  },
+  {
+    id: "cafe",
+    title: "Café de\nSpécialité.",
+    desc: "Sourcing et exportation de grains de café vert d'exception et torréfaction haut de gamme.",
+    image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=90",
+    link: "/import-export",
+    badge: "Grains Premium",
   },
   {
     id: "automobile",
@@ -25,12 +33,12 @@ const HERO_SLIDES = [
     badge: "Automobile",
   },
   {
-    id: "medical",
-    title: "Photonique\n& Santé.",
-    desc: "Logistique d'urgence de robots médicaux, dispositifs chirurgicaux et consommables critiques.",
-    image: "/images/hero/medical.png",
+    id: "bijoux",
+    title: "Or &\nJoaillerie.",
+    desc: "Exportation de bijoux de luxe, lingots d'or certifiés et diamants sourcés au Gold Souk de Dubaï.",
+    image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1920&q=90",
     link: "/import-export",
-    badge: "Logistique Clinique",
+    badge: "Luxe & Or",
   },
   {
     id: "mode",
@@ -50,11 +58,11 @@ const HERO_SLIDES = [
   },
   {
     id: "architecture",
-    title: "Structure\n& Noblesse.",
-    desc: "Marbres précieux, bois d'ébénisterie fine et revêtements en grès cérame pour l'immobilier VIP.",
+    title: "Matériaux de\nConstruction.",
+    desc: "Marbre, acier et finitions de haute qualité pour vos projets de construction et d'aménagement.",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=90",
     link: "/import-export",
-    badge: "Matériaux Nobles",
+    badge: "Gros Œuvre",
   },
 ];
 
