@@ -106,7 +106,7 @@ export function PricingSection() {
         }}
       />
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-20 flex flex-col items-center">
+      <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-20 flex flex-col items-center">
         {/* ── HEADER ── */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}

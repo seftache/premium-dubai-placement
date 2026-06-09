@@ -157,7 +157,7 @@ export function ServicesCarousel() {
           CONTENT (Z-10)
           ═══════════════════════════════════════════ */}
       <div className="relative z-10 flex items-center justify-center min-h-screen w-full px-4 sm:px-8 lg:px-16">
-        <div className="w-full max-w-[1400px] flex flex-col lg:flex-row items-center gap-8 lg:gap-4 pt-20 pb-8 sm:pt-24 sm:pb-16 lg:pt-0 lg:pb-0">
+        <div className="w-full max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-4 pt-20 pb-8 sm:pt-24 sm:pb-16 lg:pt-0 lg:pb-0">
 
           {/* ── LEFT SIDE ── */}
           <div className="flex items-start sm:items-center gap-3 sm:gap-4 lg:gap-8 w-full lg:w-[45%] shrink-0">
