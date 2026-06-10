@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-import { FAQSchema } from "@/components/SchemaMarkup";
+import { FAQSchema, HowToSchema, BreadcrumbSchema } from "@/components/SchemaMarkup";
 
 export const metadata: Metadata = {
   title: "Visa de Travail Dubaï (2026) | Procédure, Prix et Démarches",
@@ -14,6 +14,14 @@ export const metadata: Metadata = {
 export default function VisaDubaiPage() {
   return (
     <>
+      <BreadcrumbSchema 
+        items={[
+          { name: "Accueil", item: "https://emploisdubai.com" },
+          { name: "Guides", item: "https://emploisdubai.com" },
+          { name: "Visa Travail Dubaï", item: "https://emploisdubai.com/guides/visa-travail-dubai" }
+        ]}
+      />
+      <HowToSchema />
       <FAQSchema 
         data={[
           {

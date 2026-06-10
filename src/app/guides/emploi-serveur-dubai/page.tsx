@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-import { JobPostingSchema, FAQSchema } from "@/components/SchemaMarkup";
+import { JobPostingSchema, FAQSchema, BreadcrumbSchema } from "@/components/SchemaMarkup";
 
 export const metadata: Metadata = {
   title: "Trouver un emploi de Serveur à Dubaï (2026) | Salaires et Visa",
@@ -14,6 +14,13 @@ export const metadata: Metadata = {
 export default function ServeurDubaiPage() {
   return (
     <>
+      <BreadcrumbSchema 
+        items={[
+          { name: "Accueil", item: "https://emploisdubai.com" },
+          { name: "Guides", item: "https://emploisdubai.com" },
+          { name: "Emploi Serveur Dubaï", item: "https://emploisdubai.com/guides/emploi-serveur-dubai" }
+        ]}
+      />
       <JobPostingSchema 
         data={{
           title: "Serveur / Serveuse Premium - Hôtellerie de Luxe",

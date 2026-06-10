@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
+import { LocalBusinessSchema } from "@/components/SchemaMarkup";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -135,6 +136,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-brand-black text-white"
         suppressHydrationWarning
       >
+        <LocalBusinessSchema />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-51J03FB3S6"
