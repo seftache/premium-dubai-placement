@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+import { JobPostingSchema, FAQSchema } from "@/components/SchemaMarkup";
+
 export const metadata: Metadata = {
   title: "Trouver un emploi de Serveur à Dubaï (2026) | Salaires et Visa",
   description: "Guide complet pour trouver un travail de serveur ou serveuse à Dubaï. Découvrez les salaires, les conditions de logement, et comment obtenir votre visa de travail.",
@@ -11,7 +13,28 @@ export const metadata: Metadata = {
 
 export default function ServeurDubaiPage() {
   return (
-    <div className="min-h-screen bg-brand-black text-white pt-32 pb-20">
+    <>
+      <JobPostingSchema 
+        data={{
+          title: "Serveur / Serveuse Premium - Hôtellerie de Luxe",
+          description: "Recrutement de serveurs qualifiés pour les meilleurs restaurants et hôtels de Dubaï. Salaire attractif, logement fourni et visa sponsorisé.",
+          salary: 4500,
+          salaryCurrency: "AED"
+        }} 
+      />
+      <FAQSchema 
+        data={[
+          {
+            question: "Quel est le salaire d'un serveur à Dubaï ?",
+            answer: "Un serveur débutant gagne entre 3 000 et 5 000 AED par mois, sans compter les pourboires qui peuvent doubler ce montant."
+          },
+          {
+            question: "Qui paie le logement pour un serveur à Dubaï ?",
+            answer: "La majorité des employeurs fournissent le logement dans des résidences pour employés, ainsi que le transport et la nourriture."
+          }
+        ]}
+      />
+      <div className="min-h-screen bg-brand-black text-white pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-6 sm:px-12 lg:px-20">
         <h1 className="text-3xl md:text-5xl font-bold text-brand-gold mb-8">Trouver un Emploi de Serveur à Dubaï en 2026</h1>
         
@@ -53,5 +76,6 @@ export default function ServeurDubaiPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

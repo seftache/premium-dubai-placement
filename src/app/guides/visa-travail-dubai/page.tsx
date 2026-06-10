@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+import { FAQSchema } from "@/components/SchemaMarkup";
+
 export const metadata: Metadata = {
   title: "Visa de Travail Dubaï (2026) | Procédure, Prix et Démarches",
   description: "Tout savoir sur le visa de travail à Dubaï pour les Africains et les Européens. Démarches, prix, sponsoring et comment obtenir son visa résident facilement.",
@@ -11,7 +13,20 @@ export const metadata: Metadata = {
 
 export default function VisaDubaiPage() {
   return (
-    <div className="min-h-screen bg-brand-black text-white pt-32 pb-20">
+    <>
+      <FAQSchema 
+        data={[
+          {
+            question: "Qui paie le Visa de Travail à Dubaï ?",
+            answer: "Selon la loi émiratie, c'est l'employeur (le sponsor) qui doit prendre en charge tous les frais liés au visa de travail."
+          },
+          {
+            question: "Quelle est la durée du Visa de Travail ?",
+            answer: "Le visa de résidence lié à l'emploi est généralement valable 2 ans et est renouvelable."
+          }
+        ]}
+      />
+      <div className="min-h-screen bg-brand-black text-white pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-6 sm:px-12 lg:px-20">
         <h1 className="text-3xl md:text-5xl font-bold text-brand-gold mb-8">Obtenir son Visa de Travail pour Dubaï en 2026</h1>
         
@@ -49,5 +64,6 @@ export default function VisaDubaiPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
