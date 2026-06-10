@@ -29,11 +29,11 @@ function Logo() {
   return (
     <Link 
       href="/" 
-      className="flex items-center gap-3.5 shrink-0 group transition-transform duration-300 hover:scale-[1.02]"
+      className="flex items-center gap-3 shrink-0 group"
       aria-label="Emplois Dubai"
     >
       {/* Diamond icon */}
-      <svg width="34" height="34" viewBox="0 0 28 28" fill="none" aria-hidden="true" className="drop-shadow-lg">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <polygon
           points="14,1 27,14 14,27 1,14"
           stroke="url(#logoGold)"
@@ -55,12 +55,12 @@ function Logo() {
       </svg>
 
       {/* Word-mark */}
-      <div className="flex flex-col leading-tight">
-        <span className="text-white text-base sm:text-[17px] font-bold tracking-widest uppercase drop-shadow-md">
+      <div className="flex flex-col leading-none">
+        <span className="text-white text-sm font-bold tracking-wider uppercase">
           EMPLOIS
         </span>
         <span
-          className="text-[12px] sm:text-[13px] font-light tracking-[0.25em] uppercase"
+          className="text-xs font-light tracking-[0.22em] uppercase"
           style={{ color: "#d4a853" }}
         >
           DUBAI
@@ -267,7 +267,7 @@ export function Navbar() {
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-800/60 shadow-lg shadow-black/20' : 'bg-zinc-950/50 backdrop-blur-md border-b border-zinc-900/40'}`}
       >
-        <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-20 h-16 lg:h-20 flex items-center justify-between relative">
+        <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-20 h-12 flex items-center justify-between relative">
           <Logo />
           <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center">
             <DesktopLinks current={pathname} />
