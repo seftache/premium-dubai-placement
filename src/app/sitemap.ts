@@ -49,5 +49,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: `${baseUrl}/guides/emploi-serveur-dubai`,
+      lastModified: today,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/guides/visa-travail-dubai`,
+      lastModified: today,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
   ];
 }
