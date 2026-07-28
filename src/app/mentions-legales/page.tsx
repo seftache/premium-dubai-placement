@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Mentions Légales | Emplois Dubaï",
   description: "Mentions légales et informations juridiques concernant Emplois Dubaï.",
+  alternates: {
+    canonical: "https://emploisdubai.com/mentions-legales",
+  },
 };
 
 export default function MentionsLegalesPage() {

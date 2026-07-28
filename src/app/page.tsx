@@ -4,6 +4,7 @@ import { ImportExportCarousel } from "@/components/ImportExportCarousel";
 import { ServicesPreview } from "@/components/ServicesPreview";
 import { SharedBackgroundLayout, SharedBackgroundLayoutMarina } from "@/components/SharedBackgroundLayout";
 import { PricingSection } from "@/components/PricingSection";
+import { FAQSection } from "@/components/FAQSection";
 
 export default function Home() {
   return (
@@ -20,7 +21,10 @@ export default function Home() {
         <ServicesPreview />
         <PricingSection />
       </SharedBackgroundLayoutMarina>
+
+      <FAQSection />
     </>
   );
 }
+
 

@@ -86,7 +86,7 @@ export function HeroSection() {
             className="inline-block border border-[#d4a853]/40 px-4.5 py-1.5 rounded-full mb-6 bg-[#d4a853]/5"
           >
             <span className="text-[9px] sm:text-[10px] tracking-[0.25em] font-sans font-medium text-[#d4a853] uppercase">
-              • CONCIERGERIE DE RECRUTEMENT D&apos;ÉLITE •
+              • AGENCE N°1 DE RECRUTEMENT & EMPLOIS À DUBAÏ •
             </span>
           </motion.div>
 
@@ -99,9 +99,9 @@ export function HeroSection() {
               mb-8
             "
           >
-            Votre Carrière à Dubaï
+            Emplois Dubaï : Recrutement &amp; Placement
             <br />
-            <span className="text-[#d4a853]">Commence Ici.</span>
+            <span className="text-[#d4a853]">Premium aux Émirats.</span>
           </motion.h1>
 
           {/* ─── DESCRIPTION ─────────────────────────── */}
@@ -114,8 +114,8 @@ export function HeroSection() {
               mb-10
             "
           >
-            <p className="font-semibold text-white mb-2">Une prise en charge intégrale et sur-mesure :</p>
-            <p className="text-zinc-400">Visa, Logement, Emploi premium — nous orchestrons chaque étape de votre nouvelle vie aux Émirats.</p>
+            <p className="font-semibold text-white mb-2">Trouvez votre emploi d&apos;exception à Dubaï :</p>
+            <p className="text-zinc-400">Offres d&apos;emploi exclusives, Visa de résidence garanti, Logement premium et accompagnement de A à Z.</p>
           </motion.div>
 
           {/* ─── PILLS / BADGES (Gold Outlined Capsules) ─── */}

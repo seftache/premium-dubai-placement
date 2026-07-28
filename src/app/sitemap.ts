@@ -13,39 +13,67 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: {
           fr: baseUrl,
+          'fr-FR': baseUrl,
         },
       },
     },
     {
       url: `${baseUrl}/services`,
       lastModified: today,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'daily' as const,
       priority: 0.9,
       alternates: {
         languages: {
           fr: `${baseUrl}/services`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/import-export`,
-      lastModified: today,
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
-      alternates: {
-        languages: {
-          fr: `${baseUrl}/import-export`,
+          'fr-FR': `${baseUrl}/services`,
         },
       },
     },
     {
       url: `${baseUrl}/candidature`,
       lastModified: today,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'daily' as const,
       priority: 0.9,
       alternates: {
         languages: {
           fr: `${baseUrl}/candidature`,
+          'fr-FR': `${baseUrl}/candidature`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/import-export`,
+      lastModified: today,
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/import-export`,
+          'fr-FR': `${baseUrl}/import-export`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/mentions-legales`,
+      lastModified: today,
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/mentions-legales`,
+          'fr-FR': `${baseUrl}/mentions-legales`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/confidentialite`,
+      lastModified: today,
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/confidentialite`,
+          'fr-FR': `${baseUrl}/confidentialite`,
         },
       },
     },

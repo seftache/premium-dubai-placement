@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Politique de Confidentialité | Emplois Dubaï",
   description: "Politique de protection des données et de confidentialité des candidats.",
+  alternates: {
+    canonical: "https://emploisdubai.com/confidentialite",
+  },
 };
 
 export default function ConfidentialitePage() {
