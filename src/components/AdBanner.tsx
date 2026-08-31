@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 
-const images = [
-  "/images/pub1.jpg",
-  "/images/pub2.jpg",
-  "/images/pub3.jpg",
-  "/images/pub4.jpg",
-  "/images/pub5.jpg",
-  "/images/pub6.jpg",
-  "/images/pub7.jpg",
-  "/images/pub8.jpg",
-  "/images/pub9.jpg",
-  "/images/pub10.jpg",
+const ads = [
+  { src: "/images/pub-ethicalhacker.png", link: "https://ethicalhackerprep.com/" },
+  { src: "/images/pub-docuexpress.png", link: "https://docuexpress.site/cv" },
+  { src: "/images/pub-gadjico.png", link: "https://gadjico.netlify.app/" },
+  { src: "/images/pub-uniquevoyage.png", link: "https://uniquevoyage.site/" },
+  { src: "/images/pub-placeholder-1.jpg", link: "https://wa.me/2250545745749" },
+  { src: "/images/pub-placeholder-2.jpg", link: "https://wa.me/2250545745749" },
+  { src: "/images/pub-placeholder-3.jpg", link: "https://wa.me/2250545745749" },
+  { src: "/images/pub-placeholder-4.jpg", link: "https://wa.me/2250545745749" },
+  { src: "/images/pub-placeholder-5.jpg", link: "https://wa.me/2250545745749" },
+  { src: "/images/pub-placeholder-6.jpg", link: "https://wa.me/2250545745749" },
 ];
 
 export function AdBanner() {
@@ -27,19 +27,19 @@ export function AdBanner() {
     if (isPaused) return;
     const timer = setInterval(() => {
       setPrevIndex(currentIndex);
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setCurrentIndex((prev) => (prev + 1) % ads.length);
     }, slideDuration);
     return () => clearInterval(timer);
   }, [isPaused, currentIndex]);
 
   const nextSlide = () => {
     setPrevIndex(currentIndex);
-    setCurrentIndex((prev) => (prev + 1) % images.length);
+    setCurrentIndex((prev) => (prev + 1) % ads.length);
   };
   
   const prevSlide = () => {
     setPrevIndex(currentIndex);
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentIndex((prev) => (prev - 1 + ads.length) % ads.length);
   };
   
   const goToSlide = (index: number) => {
@@ -69,7 +69,6 @@ export function AdBanner() {
   return (
     <section 
       className="ad-banner-section" 
-      style={{ marginTop: "-1px" }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -78,29 +77,12 @@ export function AdBanner() {
     >
       <style dangerouslySetInnerHTML={{ __html: `
         .ad-banner-section {
-          height: 500px;
+          width: 100%;
+          aspect-ratio: 21 / 9;
+          max-height: 80vh;
           position: relative;
           overflow: hidden;
-          background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 50%, rgba(168, 85, 247, 0.15) 100%);
-          border-top: 1px solid rgba(99, 102, 241, 0.3);
-          border-bottom: 1px solid rgba(168, 85, 247, 0.3);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        .ad-banner-section::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.8) 50%, transparent 100%);
-          z-index: 2;
-        }
-        .ad-banner-section::after {
-          content: '';
-          position: absolute;
-          bottom: 0; left: 0; right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.8) 50%, transparent 100%);
-          z-index: 2;
+          background: transparent;
         }
         .ad-banner-container {
           position: relative;
@@ -115,6 +97,10 @@ export function AdBanner() {
           opacity: 0;
           transform: translateX(100%);
           transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+          background-color: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .ad-slide.active {
           opacity: 1;
@@ -190,10 +176,9 @@ export function AdBanner() {
         .ad-progress {
           position: absolute;
           bottom: 0; left: 0;
-          width: 100%; height: 4px;
-          background: rgba(255, 255, 255, 0.15);
+          width: 100%; height: 3px;
+          background: transparent;
           z-index: 10;
-          backdrop-filter: blur(5px);
         }
         .ad-progress-bar {
           height: 100%;
@@ -212,7 +197,6 @@ export function AdBanner() {
           100% { width: 100%; }
         }
         @media (max-width: 768px) {
-          .ad-banner-section { height: 320px; }
           .ad-nav-btn { width: 40px; height: 40px; opacity: 0.7; border-radius: 10px; }
           .ad-indicators { bottom: 15px; padding: 6px 12px; }
           .indicator { width: 10px; height: 10px; }
@@ -220,7 +204,6 @@ export function AdBanner() {
           .next-btn { right: 15px; }
         }
         @media (max-width: 480px) {
-          .ad-banner-section { height: 270px; }
           .ad-nav-btn { width: 35px; height: 35px; border-radius: 8px; }
           .ad-indicators { bottom: 12px; gap: 8px; }
           .indicator { width: 8px; height: 8px; }
@@ -228,13 +211,15 @@ export function AdBanner() {
       `}} />
 
       <div className="ad-banner-container">
-        {images.map((src, index) => {
+        {ads.map((ad, index) => {
           let className = "ad-slide";
           if (index === currentIndex) className += " active";
           else if (index === prevIndex) className += " leaving";
           return (
             <div key={index} className={className}>
-              <img src={src} alt={`Publicité ${index + 1}`} className="ad-image" />
+              <a href={ad.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                <img src={ad.src} alt={`Publicité ${index + 1}`} className="ad-image" />
+              </a>
             </div>
           );
         })}
@@ -251,7 +236,7 @@ export function AdBanner() {
         </button>
 
         <div className="ad-indicators">
-          {images.map((_, index) => (
+          {ads.map((_, index) => (
             <span 
               key={index} 
               className={`indicator ${index === currentIndex ? 'active' : ''}`}
