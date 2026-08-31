@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/HeroSection";
+import { AdBanner } from "@/components/AdBanner";
 import { ProcedureSection } from "@/components/ProcedureSection";
 import { ImportExportCarousel } from "@/components/ImportExportCarousel";
 import { ServicesPreview } from "@/components/ServicesPreview";
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <AdBanner />
       
       <SharedBackgroundLayout>
         <ProcedureSection />
