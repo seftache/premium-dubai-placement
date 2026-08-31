@@ -53,6 +53,7 @@ export function AdBanner() {
   };
   
   const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
     setTouchEnd(e.targetTouches[0].clientX);
   };
   
@@ -82,7 +83,9 @@ export function AdBanner() {
           max-height: 80vh;
           position: relative;
           overflow: hidden;
+          overflow-x: hidden;
           background: transparent;
+          margin-bottom: 80px;
         }
         .ad-banner-container {
           position: relative;
