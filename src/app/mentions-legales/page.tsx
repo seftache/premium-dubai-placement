@@ -46,12 +46,12 @@ export default function MentionsLegalesPage() {
               <br />
               <strong>Contact Direct :</strong>{" "}
               <a 
-                href="https://wa.me/971526252539" 
+                href="https://wa.me/2250545745749" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-brand-gold hover:text-brand-gold-light transition-colors font-medium underline underline-offset-4"
               >
-                +971 52 625 2539 (WhatsApp)
+                +225 05 45 74 57 49 (WhatsApp)
               </a>
             </p>
           </section>

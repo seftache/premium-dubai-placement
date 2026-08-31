@@ -79,7 +79,7 @@ export function LocalBusinessSchema() {
             "addressCountry": "AE"
           },
           "priceRange": "$$$",
-          "telephone": "+971526252539"
+          "telephone": "+2250545745749"
         })
       }}
     />

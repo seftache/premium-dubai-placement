@@ -58,12 +58,12 @@ export default function ConfidentialitePage() {
             <p className="legal-text">
               Conformément aux réglementations internationales de protection des données, vous disposez d&apos;un droit d&apos;accès permanent, de modification et de suppression de vos données personnelles. Pour exercer ce droit, vous pouvez à tout moment contacter la directrice via WhatsApp au numéro officiel :{" "}
               <a 
-                href="https://wa.me/971526252539" 
+                href="https://wa.me/2250545745749" 
                 target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-brand-gold hover:text-brand-gold-light transition-colors font-medium underline underline-offset-4"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                +971 52 625 2539
+                +225 05 45 74 57 49
               </a>.
             </p>
           </section>

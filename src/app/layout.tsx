@@ -121,7 +121,7 @@ export default function RootLayout({
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+971-52-625-2539",
+      telephone: "+225-05-45-74-57-49",
       contactType: "Recrutement & Support",
       availableLanguage: ["French", "English", "Arabic"],
       areaServed: ["FR", "BE", "CH", "CA", "CI", "SN", "CM", "AE"],

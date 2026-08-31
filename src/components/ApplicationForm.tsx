@@ -211,7 +211,7 @@ function useApplicationForm() {
 
 Bonjour, je viens de voir vos offres sur la plateforme Emplois Dubaï et je souhaite lancer ma procédure.`;
 
-      const whatsappUrl = `https://wa.me/971526252539?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/2250545745749?text=${encodeURIComponent(message)}`;
       
       // Open WhatsApp in a new window immediately in response to user click
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");

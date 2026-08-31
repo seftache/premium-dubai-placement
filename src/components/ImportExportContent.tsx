@@ -482,13 +482,13 @@ export function ImportExportContent() {
       : currentDest.times.aerien;
 
   const formattedMsg = encodeURIComponent(
-    `Bonjour Lou Trading & Logistics. J'ai effectué une simulation pour un projet d'importation depuis Dubaï :\n` +
+    `Bonjour Seftache Trading & Logistics. J'ai effectué une simulation pour un projet d'importation depuis Dubaï :\n` +
       `- Cargaison : ${currentCargo.title}\n` +
       `- Mode d'expédition : ${currentMode.name}\n` +
       `- Destination : ${currentDest.name}\n` +
       `Pouvez-vous m'accompagner et m'envoyer un devis personnalisé ?`
   );
-  const whatsappUrl = `https://wa.me/971526252539?text=${formattedMsg}`;
+  const whatsappUrl = `https://wa.me/2250545745749?text=${formattedMsg}`;
 
   const handleScrollToSimulator = () => {
     simulatorRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -808,7 +808,7 @@ export function ImportExportContent() {
           borderTop: '1px solid rgba(255,255,255,0.05)'
         }}>
           <span className="text-[9px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase">
-            Lou Trading Route Optimization
+            Seftache Trading Route Optimization
           </span>
           <div className="flex items-center gap-3">
             <span className="relative flex h-2 w-2">
@@ -1082,7 +1082,7 @@ export function ImportExportContent() {
       </div>
       
       <p className="font-sans text-sm sm:text-base font-light text-zinc-400 max-w-lg leading-relaxed" style={{ marginLeft: 'auto', marginRight: 'auto', marginBottom: '3rem' }}>
-        Consultez un logisticien Lou Trading pour chiffrer précisément votre transport et recevoir une offre commerciale personnalisée en moins de 24h.
+        Consultez un logisticien Seftache Trading pour chiffrer précisément votre transport et recevoir une offre commerciale personnalisée en moins de 24h.
       </p>
       
       <div className="flex justify-center">
@@ -1099,7 +1099,7 @@ export function ImportExportContent() {
         >
           <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
           <span className="relative z-10 flex items-center gap-3.5">
-            Contacter Lou
+            Contacter Seftache
             <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

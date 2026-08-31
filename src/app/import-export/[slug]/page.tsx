@@ -18,7 +18,7 @@ const UNIVERSE_PAGES: Record<string, { title: string; videoId: string; subject: 
   energie: { title: "Énergie Solaire", videoId: "UgV4UxPavIw", subject: "équipements solaires" },
 };
 
-const WHATSAPP_NUMBER = "971526252539";
+const WHATSAPP_NUMBER = "2250545745749";
 
 export default function UniverseDedicatedPage() {
   const params = useParams();
@@ -47,7 +47,7 @@ export default function UniverseDedicatedPage() {
   }
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    `Bonjour Lou Transit, je souhaite initier une importation concernant les ${data.subject}. Pouvez-vous m'accompagner ?`
+    `Bonjour Seftache Transit, je souhaite initier une importation concernant les ${data.subject}. Pouvez-vous m'accompagner ?`
   )}`;
 
   return (
@@ -143,7 +143,7 @@ export default function UniverseDedicatedPage() {
             className="group relative inline-flex items-center gap-4 px-8 py-4 sm:px-10 sm:py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-white transition-all duration-700 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] active:scale-95"
           >
             <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase">
-              Importer via Lou Transit
+              Importer via Seftache Transit
             </span>
             <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 transition-transform duration-500 group-hover:translate-x-1.5 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
