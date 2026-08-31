@@ -49,20 +49,27 @@ export function AdBanner() {
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0].clientX);
     setIsPaused(true);
   };
   
   const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault();
-    setTouchEnd(e.targetTouches[0].clientX);
+    const currentX = e.targetTouches[0].clientX;
+    const diff = Math.abs(touchStart - currentX);
+    if (diff > 10) {
+      e.preventDefault();
+    }
+    setTouchEnd(currentX);
   };
   
   const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      nextSlide();
-    }
-    if (touchStart - touchEnd < -50) {
-      prevSlide();
+    const diff = touchStart - touchEnd;
+    if (Math.abs(diff) > 80) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
     }
     setTimeout(() => setIsPaused(false), 3000);
   };
