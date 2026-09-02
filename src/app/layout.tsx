@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Maintenance } from "@/components/Maintenance";
 import Script from "next/script";
 import { LocalBusinessSchema } from "@/components/SchemaMarkup";
 import "./globals.css";
@@ -316,9 +317,11 @@ export default function RootLayout({
           {JSON.stringify(jsonLdBreadcrumb)}
         </Script>
 
-        <Navbar />
+        {/* MAINTENANCE MODE ACTIVE */}
+        {/* <Navbar />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <Footer /> */}
+        <Maintenance />
       </body>
     </html>
   );
