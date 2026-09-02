@@ -10,19 +10,19 @@ interface FAQItem {
 
 const FAQS: FAQItem[] = [
   {
-    question: "Comment trouver un emploi à Dubaï avec l'agence Emplois Dubaï ?",
+    question: "Comment fonctionne la mise en relation avec Emplois Dubaï ?",
     answer:
-      "Pour trouver un emploi à Dubaï, soumettez gratuitement votre candidature via notre formulaire en ligne. Nos consultants en recrutement analysent vos compétences sous 48 heures et sélectionnent les offres d'emploi aux Émirats Arabes Unis correspondant le mieux à votre profil.",
+      "Pour accéder aux opportunités à Dubaï, soumettez votre profil via notre formulaire en ligne. Notre équipe transmet vos informations à des recruteurs partenaires aux Émirats Arabes Unis correspondant le mieux à vos compétences.",
   },
   {
-    question: "Le visa de résidence et le permis de travail sont-ils garantis ?",
+    question: "Comment sont gérés les visas de travail et de résidence à Dubaï ?",
     answer:
-      "Oui. Notre conciergerie de recrutement s'occupe de l'intégralité du processus administratif avec le Ministère du Travail de Dubaï (MOHRE) pour l'émission officielle de votre visa de résidence et de votre contrat de travail.",
+      "Les visas de travail et permis de résidence sont traités et pris en charge directement par les employeurs partenaires selon la réglementation officielle du Ministère du Travail (MOHRE) des Émirats Arabes Unis.",
   },
   {
-    question: "Le logement et l'accueil à l'aéroport sont-ils pris en charge ?",
+    question: "Des options de logement sont-elles proposées par les employeurs à Dubaï ?",
     answer:
-      "Absolument. La majorité de nos placements premium comprennent un logement sécurisé, meublé et équipé dès votre arrivée, ainsi qu'un transfert VIP depuis l'aéroport international de Dubaï (DXB).",
+      "De nombreuses offres de nos employeurs partenaires incluent des options de logement ou des indemnités d'hébergement. Les conditions exactes sont communiquées directement par l'employeur recruteur.",
   },
   {
     question: "Quels secteurs recrutent le plus actuellement à Dubaï ?",
@@ -32,7 +32,7 @@ const FAQS: FAQItem[] = [
   {
     question: "Faut-il parler couramment anglais pour travailler à Dubaï ?",
     answer:
-      "Parler anglais est un avantage, mais nous disposons de nombreux postes ouverts aux candidats francophones avec une assistance francophone complète à chaque étape de votre installation.",
+      "Parler anglais est un avantage, mais nos partenaires proposent également des postes ouverts aux candidats francophones avec un accompagnement adapté.",
   },
 ];
 
@@ -56,7 +56,7 @@ export function FAQSection() {
             Tout savoir sur les <span className="text-brand-gold">Emplois à Dubaï</span>
           </h2>
           <p className="text-zinc-400 text-sm sm:text-base font-light max-w-2xl mx-auto">
-            Réponses aux questions les plus fréquentes sur le recrutement, l&apos;obtention du visa et l&apos;installation aux Émirats Arabes Unis.
+            Réponses aux questions les plus fréquentes sur la mise en relation, les opportunités d&apos;emploi et l&apos;installation aux Émirats Arabes Unis.
           </p>
         </div>
 

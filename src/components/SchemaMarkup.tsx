@@ -61,6 +61,8 @@ export function JobPostingSchema({ data }: { data: any }) {
   );
 }
 
+import { CONTACT_CONFIG } from "@/lib/contact";
+
 export function LocalBusinessSchema() {
   return (
     <script
@@ -70,7 +72,7 @@ export function LocalBusinessSchema() {
           "@context": "https://schema.org",
           "@type": "EmploymentAgency",
           "name": "Emplois Dubaï",
-          "description": "Conciergerie privée de recrutement à Dubaï. Placement Premium, Visa et Logement.",
+          "description": "Portail d'opportunités d'emploi et de mise en relation à Dubaï. Accompagnement informatif et partenariats vérifiés.",
           "url": "https://emploisdubai.com",
           "image": "https://emploisdubai.com/hero-dubai-night.jpg",
           "address": {
@@ -79,7 +81,7 @@ export function LocalBusinessSchema() {
             "addressCountry": "AE"
           },
           "priceRange": "$$$",
-          "telephone": "+2250545745749"
+          "telephone": CONTACT_CONFIG.phone || "+971-4-000-0000"
         })
       }}
     />
@@ -120,7 +122,7 @@ export function HowToSchema() {
             {
               "@type": "HowToStep",
               "name": "Obtenir une offre d'emploi",
-              "text": "Trouvez un employeur sponsor via l'agence Emplois Dubaï."
+              "text": "Découvrez des opportunités ciblées auprès d'employeurs sponsors partenaires."
             },
             {
               "@type": "HowToStep",

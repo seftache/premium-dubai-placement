@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT_CONFIG } from "@/lib/contact";
 
 export function Footer() {
   return (
@@ -29,7 +30,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-xs font-sans font-light leading-relaxed text-white/40 max-w-xs">
-              Votre conciergerie d&apos;élite pour une carrière exceptionnelle aux Émirats Arabes Unis. Placement, visa, et accompagnement intégral.
+              Portail d&apos;opportunités professionnelles et de mise en relation avec des recruteurs partenaires aux Émirats Arabes Unis.
             </p>
           </div>
 
@@ -86,10 +87,14 @@ export function Footer() {
                 Dubaï Marina, UAE
               </li>
               <li>
-                <span className="block text-white/70 font-medium">WhatsApp Directrice</span>
-                <a href="https://wa.me/2250545745749" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300 flex items-center gap-2">
-                  +225 05 45 74 57 49
-                </a>
+                <span className="block text-white/70 font-medium">Contact &amp; Assistance</span>
+                {CONTACT_CONFIG.whatsappUrl ? (
+                  <a href={CONTACT_CONFIG.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300 flex items-center gap-2">
+                    {CONTACT_CONFIG.whatsappNumber || CONTACT_CONFIG.phone}
+                  </a>
+                ) : (
+                  <span>{CONTACT_CONFIG.phone || CONTACT_CONFIG.email || "Via formulaire de contact"}</span>
+                )}
               </li>
             </ul>
           </div>

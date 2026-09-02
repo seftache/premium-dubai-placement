@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Maintenance } from "@/components/Maintenance";
+import { CONTACT_CONFIG } from "@/lib/contact";
 import Script from "next/script";
 import { LocalBusinessSchema } from "@/components/SchemaMarkup";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://emploisdubai.com"),
-  title: "Emplois Dubaï | Agence de Recrutement & Offres d'Emploi à Dubaï",
+  title: "Emplois Dubaï | Portail d'Offres d'Emploi & Mise en Relation à Dubaï",
   description:
-    "Emplois Dubaï : Agence N°1 de recrutement & placement premium à Dubaï. Trouvez votre emploi de prestige aux Émirats Arabes Unis. Visa de résidence garanti, logement inclus et accompagnement sur-mesure.",
+    "Emplois Dubaï : portail de mise en relation entre candidats et recruteurs partenaires aux Émirats Arabes Unis. Déposez votre profil et consultez les opportunités.",
   keywords: [
     "emplois dubaï",
     "emploi dubaï",
@@ -21,13 +22,13 @@ export const metadata: Metadata = {
     "agence de recrutement dubaï",
     "cabinet de recrutement dubaï",
     "recruteur dubaï",
-    "visa travail dubaï",
+    "opportunités dubaï",
     "emploi chauffeur dubaï",
     "emploi hôtellerie dubaï",
     "emploi import export dubaï",
     "emploi btp dubaï",
     "trouver un travail à dubaï",
-    "placement dubaï",
+    "mise en relation dubaï",
     "carrière émirats arabes unis",
   ],
   authors: [{ name: "Emplois Dubaï", url: "https://emploisdubai.com" }],
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
       "fr-FR": "https://emploisdubai.com",
     },
   },
-  category: "Emploi, Recrutement, Placement, Dubaï",
+  category: "Emploi, Recrutement, Mise en relation, Dubaï",
   robots: {
     index: true,
     follow: true,
@@ -62,16 +63,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: "https://emploisdubai.com",
-    title: "Emplois Dubaï | Agence de Recrutement & Placement Premium à Dubaï",
+    title: "Emplois Dubaï | Portail d'Offres d'Emploi & Mise en Relation à Dubaï",
     description:
-      "Trouvez votre emploi de prestige à Dubaï. Agence N°1 de recrutement : offres d'emploi, visa de résidence garanti, logement et accompagnement intégral.",
+      "Portail de mise en relation avec des recruteurs et partenaires vérifiés à Dubaï. Déposez votre profil et accédez à des opportunités ciblées.",
     siteName: "Emplois Dubaï",
     images: [
       {
         url: "https://emploisdubai.com/hero-dubai-night.jpg",
         width: 1200,
         height: 630,
-        alt: "Emplois Dubaï - Agence de Recrutement et Offres d'Emploi à Dubaï",
+        alt: "Emplois Dubaï - Portail d'Offres d'Emploi et Mise en Relation à Dubaï",
       },
     ],
   },
@@ -79,9 +80,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@EmploisDubai",
     creator: "@EmploisDubai",
-    title: "Emplois Dubaï | Recrutement & Placement Premium à Dubaï",
+    title: "Emplois Dubaï | Portail d'Offres d'Emploi & Mise en Relation à Dubaï",
     description:
-      "Votre carrière de prestige à Dubaï commence ici. Offres d'emploi, visa de résidence, logement inclus. Secteurs : Hôtellerie, Chauffeur, BTP, Import-Export.",
+      "Mise en relation avec des recruteurs partenaires à Dubaï. Secteurs : Hôtellerie, Chauffeur, BTP, Import-Export.",
     images: ["https://emploisdubai.com/hero-dubai-night.jpg"],
   },
   appleWebApp: {
@@ -102,12 +103,12 @@ export default function RootLayout({
     "@type": "EmploymentAgency",
     "@id": "https://emploisdubai.com/#agency",
     name: "Emplois Dubaï",
-    alternateName: ["Emplois Dubai", "Agence Emplois Dubaï", "Recrutement Dubaï"],
+    alternateName: ["Emplois Dubai", "Portail Emplois Dubaï", "Mise en Relation Dubaï"],
     url: "https://emploisdubai.com",
     logo: "https://emploisdubai.com/favicon.ico",
     image: "https://emploisdubai.com/hero-dubai-night.jpg",
     description:
-      "Agence leader en recrutement et placement premium à Dubaï (Émirats Arabes Unis). Accompagnement complet : offres d'emploi sur-mesure, obtention du visa de résidence, logement garanti.",
+      "Portail leader de mise en relation et d'opportunités d'emploi à Dubaï (Émirats Arabes Unis). Mise en relation ciblée entre candidats et recruteurs partenaires vérifiés.",
     priceRange: "€€€",
     address: {
       "@type": "PostalAddress",
@@ -122,8 +123,8 @@ export default function RootLayout({
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+225-05-45-74-57-49",
-      contactType: "Recrutement & Support",
+      telephone: CONTACT_CONFIG.phone || "+971-4-000-0000",
+      contactType: "Support & Mise en relation",
       availableLanguage: ["French", "English", "Arabic"],
       areaServed: ["FR", "BE", "CH", "CA", "CI", "SN", "CM", "AE"],
     },
@@ -135,38 +136,38 @@ export default function RootLayout({
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Secteurs de Recrutement à Dubaï",
+      name: "Secteurs d'Opportunités à Dubaï",
       itemListElement: [
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Emplois Chauffeur Privé VIP Dubaï",
-            description: "Placement de chauffeurs privés et VIP à Dubaï.",
+            name: "Mise en relation Chauffeur Privé VIP Dubaï",
+            description: "Opportunités et mise en relation pour chauffeurs privés et VIP à Dubaï.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Emplois Hôtellerie & Restauration Dubaï",
-            description: "Recrutement dans la restauration de luxe et les hôtels 5 étoiles à Dubaï.",
+            name: "Mise en relation Hôtellerie & Restauration Dubaï",
+            description: "Opportunités ciblées dans la restauration et l'hôtellerie à Dubaï.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Emplois Sécurité & Vigilance Dubaï",
-            description: "Postes de sécurité, surveillance et agents qualifiés à Dubaï.",
+            name: "Mise en relation Sécurité & Vigilance Dubaï",
+            description: "Mise en contact pour postes de sécurité et surveillance à Dubaï.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Emplois Import-Export & Logistique Dubaï",
-            description: "Opportunités dans le commerce international et la logistique aux Émirats.",
+            name: "Mise en relation Import-Export & Logistique Dubaï",
+            description: "Mise en relation avec des partenaires commerciaux et logistiques aux Émirats.",
           },
         },
       ],
@@ -195,26 +196,26 @@ export default function RootLayout({
     mainEntity: [
       {
         "@type": "Question",
-        name: "Comment trouver un emploi à Dubaï avec l'agence Emplois Dubaï ?",
+        name: "Comment fonctionne la mise en relation avec Emplois Dubaï ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Pour trouver un emploi à Dubaï, il vous suffit de remplir notre formulaire de candidature en ligne. Notre équipe analyse votre profil sous 48h et vous met en relation avec des recruteurs partenaires aux Émirats Arabes Unis.",
+          text: "Pour accéder aux opportunités à Dubaï, il vous suffit de remplir notre formulaire de mise en relation en ligne. Notre équipe transmet votre profil à des recruteurs partenaires aux Émirats Arabes Unis.",
         },
       },
       {
         "@type": "Question",
-        name: "Le visa de travail et de résidence à Dubaï est-il garanti ?",
+        name: "Comment sont gérés les visas de travail et de résidence à Dubaï ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Oui, notre conciergerie de recrutement prend en charge l'intégralité des démarches administratives pour vous délivrer votre visa de résidence et votre permis de travail officiels aux Émirats.",
+          text: "Les visas de travail et permis de résidence sont traités et pris en charge directement par les employeurs partenaires selon la réglementation officielle du Ministère du Travail (MOHRE) des Émirats Arabes Unis.",
         },
       },
       {
         "@type": "Question",
-        name: "Le logement est-il inclus dans les offres d'emploi à Dubaï ?",
+        name: "Des options de logement sont-elles proposées par les employeurs à Dubaï ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Oui, la majorité de nos contrats de placement premium incluent un logement sécurisé et équipé dès votre arrivée à Dubaï, ainsi qu'un accueil VIP à l'aéroport.",
+          text: "De nombreuses offres de nos employeurs partenaires incluent des options de logement ou des indemnités d'hébergement. Les conditions exactes sont communiquées directement par l'employeur recruteur.",
         },
       },
       {
@@ -222,7 +223,7 @@ export default function RootLayout({
         name: "Quels sont les secteurs d'activité qui recrutent à Dubaï ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Les principaux secteurs en fort recrutement à Dubaï sont : les chauffeurs privés VIP, l'hôtellerie et la restauration de luxe, la sécurité, l'import-export et logistique, les métiers du BTP, ainsi que le personnel de maison.",
+          text: "Les principaux secteurs avec de fortes opportunités à Dubaï sont : les chauffeurs privés VIP, l'hôtellerie et la restauration de luxe, la sécurité, l'import-export et logistique, les métiers du BTP, ainsi que le personnel de maison.",
         },
       },
       {
@@ -230,7 +231,7 @@ export default function RootLayout({
         name: "Faut-il parler couramment anglais pour travailler à Dubaï ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Des notions d'anglais sont un atout, mais nous disposons de nombreux postes accessibles aux francophones avec un accompagnement personnalisé en français.",
+          text: "Des notions d'anglais sont un atout, mais nos partenaires proposent également des postes accessibles aux francophones avec un accompagnement adapté.",
         },
       },
     ],
@@ -317,11 +318,9 @@ export default function RootLayout({
           {JSON.stringify(jsonLdBreadcrumb)}
         </Script>
 
-        {/* MAINTENANCE MODE ACTIVE */}
-        {/* <Navbar />
+        <Navbar />
         <main className="flex-1">{children}</main>
-        <Footer /> */}
-        <Maintenance />
+        <Footer />
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ const HERO_SLIDES = [
   {
     id: "electronique",
     title: "Électronique &\nHigh-Tech.",
-    desc: "Importation de serveurs GPU IA, composants électroniques de dernière génération et matériel technologique de pointe.",
+    desc: "Mise en relation avec des fournisseurs et partenaires spécialisés à Dubaï : serveurs GPU IA, composants électroniques et matériel de pointe.",
     image: "/images/hightech.png",
     link: "/import-export",
     badge: "Tech & IA",
@@ -19,7 +19,7 @@ const HERO_SLIDES = [
   {
     id: "cafe",
     title: "Café de\nSpécialité.",
-    desc: "Sourcing et exportation de grains de café vert d'exception et torréfaction haut de gamme.",
+    desc: "Mise en relation avec des fournisseurs et partenaires spécialisés à Dubaï pour le négoce de grains de café vert et torréfaction.",
     image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=90",
     link: "/import-export",
     badge: "Grains Premium",
@@ -27,7 +27,7 @@ const HERO_SLIDES = [
   {
     id: "automobile",
     title: "Hypercars &\nPrestige.",
-    desc: "Sourcing concessions de luxe à Dubaï et expédition maritime sécurisée vers les grands ports d'Afrique.",
+    desc: "Mise en relation avec des concessions et partenaires spécialisés à Dubaï pour l'acquisition et le transport de véhicules.",
     image: "/images/hero/automobile.jpg",
     link: "/import-export",
     badge: "Automobile",
@@ -35,7 +35,7 @@ const HERO_SLIDES = [
   {
     id: "bijoux",
     title: "Or &\nJoaillerie.",
-    desc: "Exportation de bijoux de luxe, lingots d'or certifiés et diamants sourcés au Gold Souk de Dubaï.",
+    desc: "Mise en relation avec des partenaires spécialisés à Dubaï pour la bijouterie de luxe et métaux précieux.",
     image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1920&q=90",
     link: "/import-export",
     badge: "Luxe & Or",
@@ -43,7 +43,7 @@ const HERO_SLIDES = [
   {
     id: "mode",
     title: "Haute Couture\n& Éclat.",
-    desc: "Accès privilégié aux grossistes textiles émiratis. Contrôle qualité et colisage hermétique pour fret express.",
+    desc: "Mise en relation avec des grossistes et partenaires spécialisés à Dubaï dans le textile et le prêt-à-porter.",
     image: "/images/hero/mode.jpg",
     link: "/import-export",
     badge: "Prestige Fashion",
@@ -51,15 +51,15 @@ const HERO_SLIDES = [
   {
     id: "industrie",
     title: "Robotique\n& Puissance.",
-    desc: "Transit exceptionnel lourd pour turbines d'énergie, générateurs et transformateurs industriels de pointe.",
+    desc: "Mise en relation avec des fournisseurs et partenaires spécialisés à Dubaï pour l'équipement lourd et l'énergie.",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=90",
     link: "/import-export",
-    badge: "Fret Exceptionnel",
+    badge: "Équipement Pro",
   },
   {
     id: "architecture",
     title: "Matériaux de\nConstruction.",
-    desc: "Marbre, acier et finitions de haute qualité pour vos projets de construction et d'aménagement.",
+    desc: "Mise en relation avec des fournisseurs et partenaires spécialisés à Dubaï : marbre, acier et finitions.",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=90",
     link: "/import-export",
     badge: "Gros Œuvre",
@@ -562,9 +562,9 @@ export function ImportExportCarousel() {
             color: "#1d1d1f",
           }}
         >
-          Tout importer.
+          Partenaires Commerciaux.
           <br />
-          <span style={{ color: "#86868b" }}>Sans limite.</span>
+          <span style={{ color: "#86868b" }}>À Dubaï.</span>
         </h2>
       </motion.div>
 
@@ -810,6 +810,12 @@ export function ImportExportCarousel() {
             </svg>
           )}
         </button>
+      </div>
+
+      <div className="w-full max-w-4xl mx-auto px-6 mt-8 mb-4 text-center">
+        <p className="text-xs text-zinc-500 font-sans leading-relaxed">
+          Emplois Dubaï met en relation les porteurs de projets avec des partenaires commerciaux. Les transactions et contrats sont conclus directement entre les parties.
+        </p>
       </div>
 
       <style jsx>{`

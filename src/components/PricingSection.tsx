@@ -116,15 +116,15 @@ export function PricingSection() {
           className="text-center mb-12 sm:mb-16 w-full flex flex-col items-center justify-center"
         >
           <span className="mb-4 inline-block text-[11px] font-sans font-medium tracking-[0.4em] uppercase text-brand-gold/80 drop-shadow-md">
-            Tarif VIP &amp; Tout Inclus
+            Mise en Relation &amp; Accompagnement
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] drop-shadow-xl mb-6">
             Procédure Complète <br className="hidden sm:block" />
             <span className="text-brand-gold/90">&amp; Installation de Prestige</span>
           </h2>
           <p className="font-sans text-[15px] sm:text-[16px] font-light leading-relaxed text-zinc-400 max-w-2xl mx-auto text-center">
-            Un package unique premium pour concrétiser votre avenir professionnel à Dubaï.
-            De l&apos;obtention de votre visa de résidence à votre placement garanti.
+            Un service d&apos;accompagnement dédié pour concrétiser votre avenir professionnel à Dubaï :
+            mise en relation avec des recruteurs partenaires et orientation personnalisée.
           </p>
         </motion.div>
 
@@ -202,7 +202,7 @@ export function PricingSection() {
                 Pack Premium Unique
               </h3>
               <p className="font-sans text-xs text-zinc-400 font-light mb-8">
-                Prise en charge intégrale, de A à Z.
+                Accompagnement et mise en relation privilégiée.
               </p>
 
               {/* Price Container (Layout stable, no jumps) */}
@@ -263,7 +263,7 @@ export function PricingSection() {
                     Solde
                   </span>
                   <span className="text-[10px] text-zinc-400 font-sans mb-1 font-light leading-none">
-                    À l&apos;obtention du visa
+                    À la mise en relation employeur
                   </span>
                   <div className="h-6 flex items-end">
                     <AnimatePresence mode="wait">
@@ -312,7 +312,7 @@ export function PricingSection() {
           <div className="w-full md:w-[45%] p-8 sm:p-12 bg-white/[0.01] border-t md:border-t-0 md:border-l border-white/5 flex flex-col justify-between relative z-10">
             <div>
               <h4 className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-zinc-500 mb-8">
-                Prestations Incluses
+                Services Proposés
               </h4>
 
               <ul className="space-y-6">
@@ -320,10 +320,10 @@ export function PricingSection() {
                   <GoldCheckIcon />
                   <div className="flex flex-col">
                     <span className="text-[14px] font-sans font-medium text-white">
-                      Visa de résidence garanti
+                      Mise en relation avec employeurs partenaires
                     </span>
                     <span className="text-[12px] font-sans font-light text-zinc-500 leading-snug mt-0.5">
-                      Prise en charge intégrale des démarches et obtention sous quelques semaines.
+                      Transmission de votre profil aux recruteurs. Les démarches de visa sont gérées directement par les employeurs sponsors.
                     </span>
                   </div>
                 </li>
@@ -332,10 +332,10 @@ export function PricingSection() {
                   <GoldCheckIcon />
                   <div className="flex flex-col">
                     <span className="text-[14px] font-sans font-medium text-white">
-                      Logement hôtel inclus à l&apos;arrivée
+                      Options de logement via nos partenaires
                     </span>
                     <span className="text-[12px] font-sans font-light text-zinc-500 leading-snug mt-0.5">
-                      Accueil VIP et hébergement réservé pour vos premiers jours sur place.
+                      Orientation vers les solutions d&apos;hébergement et options proposées par les employeurs partenaires.
                     </span>
                   </div>
                 </li>
@@ -344,10 +344,10 @@ export function PricingSection() {
                   <GoldCheckIcon />
                   <div className="flex flex-col">
                     <span className="text-[14px] font-sans font-medium text-white">
-                      Recherche d&apos;emploi &amp; placement
+                      Recherche d&apos;opportunités ciblées
                     </span>
                     <span className="text-[12px] font-sans font-light text-zinc-500 leading-snug mt-0.5">
-                      Placement sécurisé (Chauffeur, Restauration, Sécurité, Santé, Luxe...).
+                      Opportunités ciblées (Chauffeur, Restauration, Sécurité, Santé, Luxe...).
                     </span>
                   </div>
                 </li>
@@ -356,7 +356,7 @@ export function PricingSection() {
                   <GoldCheckIcon />
                   <div className="flex flex-col">
                     <span className="text-[14px] font-sans font-medium text-white">
-                      Accompagnement WhatsApp 24/7
+                      Accompagnement &amp; Suivi de dossier
                     </span>
                     <span className="text-[12px] font-sans font-light text-zinc-500 leading-snug mt-0.5">
                       Une ligne d&apos;assistance directe pour répondre à toutes vos interrogations.

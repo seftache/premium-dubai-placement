@@ -57,16 +57,16 @@ export default function VisaDubaiPage() {
             <li><strong>Tampon du Visa :</strong> Votre visa de résidence (valable 2 ans) est apposé sur votre passeport.</li>
           </ul>
 
-          <h2 className="text-2xl font-semibold text-white mt-10">Comment accélérer la démarche depuis l'Afrique ?</h2>
+          <h2 className="text-2xl font-semibold text-white mt-10">Comment trouver un employeur sponsor depuis l'Afrique ?</h2>
           <p>
-            Pour les candidats venant d'Afrique (Côte d'Ivoire, Sénégal, Cameroun...), la recherche d'un sponsor de confiance est le plus grand obstacle. Chez <strong>Emplois Dubaï</strong>, nous avons structuré des packs premium (comme notre Pack Résident Platinum à 1 400 000 FCFA) qui vous garantissent une prise en charge totale : du recrutement à l'obtention de votre visa.
+            Pour les candidats venant d'Afrique (Côte d'Ivoire, Sénégal, Cameroun...), trouver un sponsor de confiance est l'étape essentielle. Chez <strong>Emplois Dubaï</strong>, nous facilitons votre mise en relation avec des employeurs et recruteurs partenaires vérifiés qui prennent en charge les démarches de sponsoring selon la réglementation des E.A.U.
           </p>
 
           <div className="mt-12 p-8 bg-zinc-900/50 border border-brand-gold/20 rounded-lg text-center">
-            <h3 className="text-xl font-bold text-white mb-4">Confiez-nous vos démarches d'immigration</h3>
-            <p className="mb-6">Nous nous occupons de votre visa, de votre billet d'avion et de votre placement professionnel.</p>
+            <h3 className="text-xl font-bold text-white mb-4">Accédez aux Opportunités Partenaires</h3>
+            <p className="mb-6">Nous vous mettons en relation avec des employeurs partenaires qui gèrent le processus de visa selon la réglementation des E.A.U.</p>
             <Link href="/candidature" className="inline-block bg-brand-gold text-brand-black px-8 py-3 font-bold tracking-widest uppercase hover:bg-white transition-colors">
-              Découvrir nos Packs
+              Déposer mon Profil
             </Link>
           </div>
         </div>

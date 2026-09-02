@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&family=Alex+Brush&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 /* ============================================
@@ -23,8 +23,11 @@
   --color-text-secondary: rgba(224, 224, 224, 0.7);
 
   /* Typography - Fallbacks améliorés */
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-serif: "Bodoni Moda", Didot, "Bodoni MT", "Playfair Display", Georgia, serif;
+  --font-bodoni: "Bodoni Moda", Didot, "Bodoni MT", Bodoni, serif;
+  --font-montserrat: Montserrat, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-brittany: "Brittany Signature", Brittany, "Pinyon Script", "Alex Brush", cursive;
+  --font-sans: Montserrat, Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
   /* Spacing overrides - Meilleure gestion responsive */
   --spacing-hero: min(100vh, 900px);
@@ -39,6 +42,26 @@
   --animate-shimmer: shimmer 3s ease-in-out infinite;
   --animate-pulse-glow: pulseGlow 3s ease-in-out infinite;
   --animate-gradient-shift: gradientShift 6s ease infinite;
+}
+
+/* ============================================
+   TYPOGRAPHY HELPERS (Brittany, Bodoni/Didot, Montserrat Light)
+   ============================================ */
+.font-bodoni {
+  font-family: "Bodoni Moda", Didot, "Bodoni MT", Bodoni, serif;
+}
+
+.font-montserrat {
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-montserrat-light {
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+}
+
+.font-brittany {
+  font-family: "Brittany Signature", "Brittany", "Pinyon Script", "Alex Brush", cursive;
 }
 
 /* ============================================

@@ -12,8 +12,8 @@ import {
 
 // Métadonnées ultra-optimisées
 export const metadata: Metadata = {
-  title: "Serveur à Dubaï 2026 | Salaire 8000 AED + Logement | Recrutement Urgent",
-  description: "✅ 147 offres de serveur/serveuse à Dubaï ✅ Salaire jusqu'à 8000 AED + tips ✅ Logement & visa inclus ✅ Recrutement international ✅ Démarrage immédiat",
+  title: "Serveur à Dubaï 2026 | Salaire 8000 AED + Logement Partenaire | Recrutement",
+  description: "✅ Opportunités de serveur/serveuse à Dubaï ✅ Salaire jusqu'à 8000 AED + tips ✅ Options de logement via partenaires ✅ Recrutement international ✅ Accompagnement",
   keywords: [
     "emploi serveur Dubaï",
     "recrutement serveur Dubaï 2026",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     "serveur francophone Dubaï"
   ].join(", "),
   openGraph: {
-    title: "Serveur à Dubaï | Salaire jusqu'à 8000 AED + Logement Inclus",
-    description: "Recrutement international de serveurs pour les meilleurs restaurants et hôtels de Dubaï. Placement garanti sous 15 jours.",
+    title: "Serveur à Dubaï | Salaire jusqu'à 8000 AED + Options de Logement",
+    description: "Mise en relation internationale pour les restaurants et hôtels partenaires de Dubaï. Opportunités ciblées et accompagnement.",
     type: "website",
     locale: "fr_FR",
     siteName: "Emplois Dubaï",
@@ -89,7 +89,7 @@ export default function ServeurDubaiPage() {
     validThrough: "2026-12-31",
     description: "Recrutement de serveurs expérimentés pour restaurants étoilés et hôtels de luxe à Dubaï.",
     qualifications: ["Expérience 1-2 ans min", "Anglais courant", "Présentation soignée"],
-    benefits: ["Logement inclus", "Transport gratuit", "Repas sur place", "Assurance santé", "Billet avion"],
+    benefits: ["Options de logement via partenaires", "Transport selon employeur", "Repas sur place", "Assurance santé", "Billet avion"],
   };
 
   const faqData = [
@@ -201,8 +201,8 @@ export default function ServeurDubaiPage() {
 
             {/* Sous-titre SEO-friendly */}
             <p className="text-xl text-zinc-300 mb-8 max-w-3xl">
-              Décrochez un <strong className="text-brand-gold">emploi de serveur à Dubaï</strong> avec logement, visa et billets d'avion inclus. 
-              Recrutement immédiat pour la saison 2026.
+              Découvrez les <strong className="text-brand-gold">opportunités de serveur à Dubaï</strong> avec options de logement et visa gérés par les employeurs partenaires. 
+              Mise en relation pour la saison 2026.
             </p>
 
             {/* CTA sticky amélioré */}
@@ -365,7 +365,7 @@ function ExitIntentPopup() {
 function TrustBadges() {
   return (
     <div className="flex flex-wrap gap-3">
-      {["Visa pris en charge", "Logement inclus", "Placement express", "Suivi personnalisé"].map((badge) => (
+      {["Recruteurs vérifiés", "Options de logement partenaires", "Opportunités ciblées", "Suivi personnalisé"].map((badge) => (
         <span key={badge} className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
           {badge}
         </span>
@@ -553,9 +553,9 @@ function CertificationBadges() {
     <div className="rounded-3xl border border-white/10 bg-zinc-950/80 p-6">
       <h3 className="text-xl font-bold mb-4">Certifications</h3>
       <div className="space-y-3 text-sm text-zinc-300">
-        <p>✔ Partenaire officiel recrutement</p>
-        <p>✔ Garantie de visa</p>
-        <p>✔ Suivi personnalisé 24/7</p>
+        <p>✔ Partenaire officiel de mise en relation</p>
+        <p>✔ Démarches visa gérées par l&apos;employeur</p>
+        <p>✔ Suivi personnalisé</p>
       </div>
     </div>
   );

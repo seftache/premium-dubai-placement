@@ -1,18 +1,21 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { CONTACT_CONFIG } from "@/lib/contact";
+
+const contactLink = CONTACT_CONFIG.whatsappUrl || "/candidature";
 
 const ads = [
   { src: "/images/pub-ethicalhacker.png", link: "https://ethicalhackerprep.com/" },
   { src: "/images/pub-docuexpress.png", link: "https://docuexpress.site/cv" },
   { src: "/images/pub-gadjico.png", link: "https://gadjico.netlify.app/" },
   { src: "/images/pub-uniquevoyage.png", link: "https://uniquevoyage.site/" },
-  { src: "/images/pub-placeholder-1.jpg", link: "https://wa.me/2250545745749" },
-  { src: "/images/pub-placeholder-2.jpg", link: "https://wa.me/2250545745749" },
-  { src: "/images/pub-placeholder-3.jpg", link: "https://wa.me/2250545745749" },
-  { src: "/images/pub-placeholder-4.jpg", link: "https://wa.me/2250545745749" },
-  { src: "/images/pub-placeholder-5.jpg", link: "https://wa.me/2250545745749" },
-  { src: "/images/pub-placeholder-6.jpg", link: "https://wa.me/2250545745749" },
+  { src: "/images/pub-placeholder-1.jpg", link: contactLink },
+  { src: "/images/pub-placeholder-2.jpg", link: contactLink },
+  { src: "/images/pub-placeholder-3.jpg", link: contactLink },
+  { src: "/images/pub-placeholder-4.jpg", link: contactLink },
+  { src: "/images/pub-placeholder-5.jpg", link: contactLink },
+  { src: "/images/pub-placeholder-6.jpg", link: contactLink },
 ];
 
 export function AdBanner() {

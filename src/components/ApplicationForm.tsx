@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { CONTACT_CONFIG } from "@/lib/contact";
 
 interface FormData {
   fullName: string;
@@ -209,12 +210,16 @@ function useApplicationForm() {
 • *Passeport valide :* ${passportLabel}
 • *Option choisie :* Paiement Échelonné (Acompte 500k)
 
-Bonjour, je viens de voir vos offres sur la plateforme Emplois Dubaï et je souhaite lancer ma procédure.`;
+Bonjour, je viens de voir vos opportunités sur la plateforme Emplois Dubaï et je souhaite être mis en relation avec des recruteurs partenaires.`;
 
-      const whatsappUrl = `https://wa.me/2250545745749?text=${encodeURIComponent(message)}`;
+      const targetPhone = CONTACT_CONFIG.whatsappNumber
+        ? CONTACT_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')
+        : "";
       
-      // Open WhatsApp in a new window immediately in response to user click
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      if (targetPhone) {
+        const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      }
 
       await new Promise((resolve) => setTimeout(resolve, SUBMIT_DURATION));
 
@@ -769,7 +774,7 @@ export function ApplicationForm() {
             <div className="gold-separator mb-8" aria-hidden="true" style={{ width: '80px', height: '2px', background: 'linear-gradient(90deg, #d4a853, transparent)' }} />
             
             <p className="max-w-lg font-sans text-sm font-light leading-relaxed text-zinc-300 sm:text-base mb-12 drop-shadow-md">
-              Rejoignez l&apos;élite des professionnels à Dubaï. Notre agence sélectionne rigoureusement les meilleurs talents pour des placements sur-mesure de très haut niveau, incluant l&apos;intégralité des démarches administratives.
+              Accédez aux meilleures opportunités professionnelles aux Émirats Arabes Unis. Notre portail sélectionne et transmet votre profil à des recruteurs partenaires pour des opportunités ciblées.
             </p>
 
             {/* Espace explicite pour séparer le texte des avantages */}
@@ -779,7 +784,7 @@ export function ApplicationForm() {
             <div className="flex flex-col gap-8">
               {[
                 { id: "01", title: "Réponse en 48h", desc: "Analyse experte et strictement confidentielle." },
-                { id: "02", title: "Accompagnement VIP", desc: "Prise en charge intégrale visa et logistique." },
+                { id: "02", title: "Mise en Relation", desc: "Transmission ciblée aux recruteurs partenaires." },
                 { id: "03", title: "Discrétion Absolue", desc: "Protection totale de vos données." }
               ].map((feature, idx) => (
                 <motion.div 

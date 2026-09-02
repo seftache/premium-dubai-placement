@@ -45,27 +45,27 @@ const STEPS: ProcedureStep[] = [
   },
   {
     number: "03",
-    title: "Démarches & Visa",
-    subtitle: "Zéro stress, on gère tout.",
+    title: "Mise en Relation & Suivi",
+    subtitle: "Connexion avec les recruteurs.",
     description:
-      "Nous prenons en charge l'intégralité des démarches administratives : visa de travail, permis de résidence, légalisations et formalités consulaires. Vous n'avez rien à faire.",
+      "Nous transmettons votre profil à nos recruteurs partenaires. Les visas et les conditions de logement sont gérés directement par les employeurs partenaires selon la réglementation des E.A.U.",
     highlights: [
-      "Visa garanti",
-      "Zéro paperasse",
-      "Suivi en temps réel",
+      "Recruteurs vérifiés",
+      "Accompagnement informatif",
+      "Suivi du dossier",
     ],
     image: "/step-visa.png",
   },
   {
     number: "04",
-    title: "Départ & Nouvelle Vie",
-    subtitle: "Bienvenue à Dubaï.",
+    title: "Départ & Installation",
+    subtitle: "Votre opportunité à Dubaï.",
     description:
-      "Billet d'avion, accueil à l'aéroport, logement temporaire — nous orchestrons chaque détail pour que votre arrivée à Dubaï soit sans aucune surprise. Votre nouvelle vie commence.",
+      "Votre employeur partenaire organise votre accueil et vos premières démarches sur place. Les conditions d'installation et de logement sont définies directement entre vous et l'employeur selon la réglementation des E.A.U.",
     highlights: [
-      "Accueil VIP aéroport",
-      "Logement sécurisé",
-      "Intégration complète",
+      "Orientation arrivée",
+      "Options de logement via partenaires",
+      "Transition sereine",
     ],
     image: "/step-arrivee.png",
   },
@@ -214,7 +214,7 @@ export function ProcedureSection() {
             </span>
           </h2>
           <p className="font-sans text-[16px] sm:text-[18px] font-medium leading-relaxed text-zinc-300 max-w-2xl mx-auto">
-            Un parcours structuré, transparent et entièrement pris en charge. De votre candidature à votre premier jour à Dubaï.
+            Un parcours structuré, transparent et orienté vers votre réussite. De votre inscription à votre mise en relation avec des recruteurs à Dubaï.
           </p>
         </div>
       </div>

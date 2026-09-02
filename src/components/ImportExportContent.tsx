@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { CONTACT_CONFIG } from "@/lib/contact";
 
 /* ============================================
    TYPES & DATA STRUCTURES
@@ -29,40 +30,40 @@ const SERVICES_DATA: ServiceCardData[] = [
   {
     id: "vehicules",
     title: "Véhicules & Engins",
-    subtitle: "Achat & Expédition sécurisée",
-    desc: "Sourcing direct en concession, inspection technique rigoureuse à Dubaï et acheminement maritime sécurisé (Ro-Ro ou conteneur) vers l'Afrique.",
+    subtitle: "Mise en relation concessionnaires & engins",
+    desc: "Mise en relation avec des concessions et partenaires spécialisés à Dubaï pour l'achat et l'acheminement vers l'Afrique.",
     image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
-    details: ["Achat direct concessions & en-can", "Rapports techniques certifiés", "Arrimage et fret maritime sécurisé"],
+    details: ["Mise en relation directe concessions", "Inspection technique via partenaires", "Fret maritime via transitaires agréés"],
     hotspots: [
       { id: "v1", top: "30%", left: "25%", label: "Achat en concession & Négociation directe" },
-      { id: "v2", top: "55%", left: "50%", label: "Rapport technique d'inspection complet avant achat" },
-      { id: "v3", top: "75%", left: "75%", label: "Arrimage et sécurisation certifiés (Ro-Ro / FCL)" }
+      { id: "v2", top: "55%", left: "50%", label: "Rapport technique d'inspection via partenaires" },
+      { id: "v3", top: "75%", left: "75%", label: "Arrimage et prise en charge via transitaires agréés" }
     ]
   },
   {
     id: "mode",
     title: "Mode & Prêt-à-porter",
-    subtitle: "Sourcing & Groupage en volume",
-    desc: "Accédez aux meilleurs grossistes de Dubaï pour le prêt-à-porter, chaussures et accessoires. Nous gérons le contrôle qualité et l'envoi express.",
+    subtitle: "Sourcing & Partenaires grossistes",
+    desc: "Accédez aux meilleurs grossistes de Dubaï pour le prêt-à-porter, chaussures et accessoires. Mise en relation avec des spécialistes du sourcing et du contrôle qualité.",
     image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
-    details: ["Sourcing grossistes exclusifs", "Contrôle qualité rigoureux", "Colisage & Groupage optimisé"],
+    details: ["Mise en relation grossistes", "Contrôle qualité via partenaires", "Options de groupage"],
     hotspots: [
-      { id: "m1", top: "20%", left: "30%", label: "Sourcing direct grossistes & Marques émiraties" },
-      { id: "m2", top: "45%", left: "60%", label: "Contrôle qualité & Comptage précis des pièces" },
-      { id: "m3", top: "70%", left: "40%", label: "Groupage & Emballage étanche anti-humidité" }
+      { id: "m1", top: "20%", left: "30%", label: "Mise en relation directe grossistes & Marques" },
+      { id: "m2", top: "45%", left: "60%", label: "Contrôle qualité & Comptage des pièces" },
+      { id: "m3", top: "70%", left: "40%", label: "Groupage et conditionnement export" }
     ]
   },
   {
     id: "fret",
     title: "Logistique & Fret",
     subtitle: "Transit global & Douanes",
-    desc: "Solutions de conteneurs complets (FCL), de groupage maritime (LCL) et de fret aérien quotidien. Prise en charge intégrale des formalités émiraties.",
+    desc: "Mise en relation avec des transitaires internationaux partenaires pour conteneurs complets (FCL), groupage maritime (LCL) et fret aérien.",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
-    details: ["Conteneurs FCL / LCL", "Fret aérien express quotidien", "Dédouanement export Dubaï"],
+    details: ["Conteneurs FCL / LCL", "Fret aérien via partenaires", "Formalités export Dubaï"],
     hotspots: [
-      { id: "l1", top: "35%", left: "35%", label: "Transit maritime direct & Fret aérien quotidien" },
-      { id: "l2", top: "60%", left: "70%", label: "Dédouanement de sortie à Jebel Ali / DWC" },
-      { id: "l3", top: "80%", left: "50%", label: "Remise sécurisée des documents d'importation" }
+      { id: "l1", top: "35%", left: "35%", label: "Transit maritime direct & Fret aérien partenaire" },
+      { id: "l2", top: "60%", left: "70%", label: "Formalités export gérées par partenaires" },
+      { id: "l3", top: "80%", left: "50%", label: "Transmission des documents d'importation" }
     ]
   }
 ];
@@ -482,13 +483,15 @@ export function ImportExportContent() {
       : currentDest.times.aerien;
 
   const formattedMsg = encodeURIComponent(
-    `Bonjour Seftache Trading & Logistics. J'ai effectué une simulation pour un projet d'importation depuis Dubaï :\n` +
+    `Bonjour ${CONTACT_CONFIG.companyName}. J'ai effectué une simulation pour un projet de mise en relation import/export depuis Dubaï :\n` +
       `- Cargaison : ${currentCargo.title}\n` +
-      `- Mode d'expédition : ${currentMode.name}\n` +
+      `- Mode d'acheminement : ${currentMode.name}\n` +
       `- Destination : ${currentDest.name}\n` +
-      `Pouvez-vous m'accompagner et m'envoyer un devis personnalisé ?`
+      `Pouvez-vous me mettre en relation avec des partenaires spécialisés ?`
   );
-  const whatsappUrl = `https://wa.me/2250545745749?text=${formattedMsg}`;
+  const whatsappUrl = CONTACT_CONFIG.whatsappNumber
+    ? `https://wa.me/${CONTACT_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${formattedMsg}`
+    : "/candidature";
 
   const handleScrollToSimulator = () => {
     simulatorRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -619,6 +622,15 @@ export function ImportExportContent() {
               index={idx}
             />
           ))}
+        </div>
+        
+        {/* Mention spécifique sous la liste des secteurs */}
+        <div className="w-full max-w-4xl mx-auto px-6 py-8 text-center">
+          <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-sm">
+            <p className="text-xs text-zinc-400 font-sans leading-relaxed">
+              Emplois Dubaï met en relation les porteurs de projets avec des partenaires commerciaux. Les transactions et contrats sont conclus directement entre les parties.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -808,7 +820,7 @@ export function ImportExportContent() {
           borderTop: '1px solid rgba(255,255,255,0.05)'
         }}>
           <span className="text-[9px] font-sans tracking-[0.2em] font-semibold text-zinc-500 uppercase">
-            Seftache Trading Route Optimization
+            Route &amp; Transit Optimization
           </span>
           <div className="flex items-center gap-3">
             <span className="relative flex h-2 w-2">
@@ -978,7 +990,7 @@ export function ImportExportContent() {
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <span className="text-sm font-sans font-medium text-emerald-400">Totalement gérées</span>
+                <span className="text-sm font-sans font-medium text-emerald-400">Gérées par partenaires</span>
               </div>
             </div>
           </div>
@@ -999,7 +1011,7 @@ export function ImportExportContent() {
           >
             <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
             <span className="relative z-10 flex items-center gap-3">
-              Obtenir un devis
+              Demander une mise en relation
               <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -1066,7 +1078,7 @@ export function ImportExportContent() {
       <div className="inline-flex items-center gap-4 mb-8">
         <div style={{ height: '1px', width: '32px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.5))' }} />
         <span className="text-[9px] font-sans font-bold tracking-[0.4em] uppercase" style={{ color: '#c9a96e' }}>
-          Division Fret International
+          Division Partenariats Internationaux
         </span>
         <div style={{ height: '1px', width: '32px', background: 'linear-gradient(to left, transparent, rgba(201,169,110,0.5))' }} />
       </div>
@@ -1082,7 +1094,7 @@ export function ImportExportContent() {
       </div>
       
       <p className="font-sans text-sm sm:text-base font-light text-zinc-400 max-w-lg leading-relaxed" style={{ marginLeft: 'auto', marginRight: 'auto', marginBottom: '3rem' }}>
-        Consultez un logisticien Seftache Trading pour chiffrer précisément votre transport et recevoir une offre commerciale personnalisée en moins de 24h.
+        Consultez nos partenaires commerciaux et logisticiens spécialisés à Dubaï pour recevoir une mise en relation personnalisée.
       </p>
       
       <div className="flex justify-center">
@@ -1099,7 +1111,7 @@ export function ImportExportContent() {
         >
           <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
           <span className="relative z-10 flex items-center gap-3.5">
-            Contacter Seftache
+            Demander une mise en relation
             <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

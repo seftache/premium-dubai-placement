@@ -9,7 +9,7 @@ const TRUST_STEPS = [
     number: "01",
     label: "Sélection Initiale",
     title: "Analyse & Audit",
-    description: "Nous évaluons rigoureusement votre profil, vos compétences et vos ambitions pour garantir une adéquation parfaite avec les exigences du marché émirati.",
+    description: "Nous évaluons rigoureusement votre profil, vos compétences et vos ambitions pour optimiser votre mise en relation avec les exigences du marché émirati.",
     image: "/step-analyse.png"
   },
   {
@@ -21,16 +21,16 @@ const TRUST_STEPS = [
   },
   {
     number: "03",
-    label: "Démarches Officielles",
-    title: "Golden Visa & Légalisation",
-    description: "Nous prenons en charge l'intégralité du processus d'immigration, de la sponsorisation au traitement de votre visa de résidence avec une efficacité redoutable.",
+    label: "Orientation & Démarches",
+    title: "Accompagnement Informatif",
+    description: "Nous vous informons sur les démarches d'expatriation et vous mettons en relation avec des employeurs partenaires qui prennent en charge le sponsoring visa selon la réglementation des E.A.U.",
     image: "/step-visa.png"
   },
   {
     number: "04",
-    label: "Départ & Nouvelle Vie",
+    label: "Départ & Installation",
     title: "Bienvenue à Dubaï",
-    description: "De l'accueil à l'aéroport jusqu'à votre installation dans un logement haut de gamme, nous orchestrons chaque détail de votre transition vers l'excellence.",
+    description: "De votre départ jusqu'à votre installation, nous vous orientons vers les solutions et options de logement proposées par nos partenaires pour faciliter votre transition vers Dubaï.",
     image: "/step-arrivee.png"
   }
 ];
