@@ -12,8 +12,8 @@ export const CONTACT_CONFIG = {
   agencyPhonePlaceholder: "Numéro de la nouvelle agence : En attente du repreneur",
   agencyPhoneNotice: "Coordonnées en cours d'attribution pour le futur locataire du site",
   
-  // Clé d'accès gratuite Web3Forms (à définir dans .env.local ou sur Vercel)
-  web3FormsAccessKey: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "",
+  // Clé d'accès gratuite Web3Forms
+  web3FormsAccessKey: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "a99ebb30-ba83-4d7c-b8b2-1f4442e0a19b",
 
   // Aucun numéro WhatsApp personnel
   phone: "",
