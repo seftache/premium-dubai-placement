@@ -56,18 +56,9 @@ export default function MentionsLegalesPage() {
               La plateforme <strong>Emplois Dubaï</strong> est exploitée à titre de portail numérique indépendant.
               <br />
               <strong>Contact &amp; Assistance :</strong>{" "}
-              {CONTACT_CONFIG.whatsappUrl ? (
-                <a 
-                  href={CONTACT_CONFIG.whatsappUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-brand-gold hover:underline font-medium"
-                >
-                  {CONTACT_CONFIG.whatsappNumber || CONTACT_CONFIG.phone}
-                </a>
-              ) : (
-                <span>{CONTACT_CONFIG.email || CONTACT_CONFIG.phone || "Via le formulaire de contact en ligne"}</span>
-              )}
+              <span>Via le formulaire de contact et de candidature en ligne ({CONTACT_CONFIG.email}).</span>
+              <br />
+              <span className="text-xs text-white/50">{CONTACT_CONFIG.agencyPhonePlaceholder} ({CONTACT_CONFIG.agencyPhoneNotice}).</span>
             </p>
           </section>
 

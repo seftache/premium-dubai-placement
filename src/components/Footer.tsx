@@ -88,13 +88,17 @@ export function Footer() {
               </li>
               <li>
                 <span className="block text-white/70 font-medium">Contact &amp; Assistance</span>
-                {CONTACT_CONFIG.whatsappUrl ? (
-                  <a href={CONTACT_CONFIG.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-300 flex items-center gap-2">
-                    {CONTACT_CONFIG.whatsappNumber || CONTACT_CONFIG.phone}
-                  </a>
-                ) : (
-                  <span>{CONTACT_CONFIG.phone || CONTACT_CONFIG.email || "Via formulaire de contact"}</span>
-                )}
+                <span className="block text-brand-gold/90 font-medium text-xs mt-1">
+                  {CONTACT_CONFIG.agencyPhonePlaceholder}
+                </span>
+                <span className="block text-[11px] text-white/40 mt-0.5 font-light">
+                  ({CONTACT_CONFIG.agencyPhoneNotice})
+                </span>
+              </li>
+              <li>
+                <Link href="/candidature" className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-brand-gold transition-colors duration-300 mt-1">
+                  <span>Formulaire de candidature &rarr;</span>
+                </Link>
               </li>
             </ul>
           </div>

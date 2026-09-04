@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CONTACT_CONFIG } from "@/lib/contact";
 
@@ -482,16 +483,7 @@ export function ImportExportContent() {
       ? currentDest.times.maritime_container
       : currentDest.times.aerien;
 
-  const formattedMsg = encodeURIComponent(
-    `Bonjour ${CONTACT_CONFIG.companyName}. J'ai effectué une simulation pour un projet de mise en relation import/export depuis Dubaï :\n` +
-      `- Cargaison : ${currentCargo.title}\n` +
-      `- Mode d'acheminement : ${currentMode.name}\n` +
-      `- Destination : ${currentDest.name}\n` +
-      `Pouvez-vous me mettre en relation avec des partenaires spécialisés ?`
-  );
-  const whatsappUrl = CONTACT_CONFIG.whatsappNumber
-    ? `https://wa.me/${CONTACT_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${formattedMsg}`
-    : "/candidature";
+  const contactUrl = "/candidature";
 
   const handleScrollToSimulator = () => {
     simulatorRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -998,10 +990,8 @@ export function ImportExportContent() {
 
         {/* Bouton Devis */}
         <div className="mt-8 pt-6 flex justify-center md:justify-end" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={contactUrl}
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-8 py-3.5 text-[11px] font-sans font-bold tracking-[0.15em] uppercase transition-all duration-500 hover:scale-[1.03]"
             style={{
               background: 'linear-gradient(135deg, #c9a96e 0%, #b8860b 50%, #c9a96e 100%)',
@@ -1016,7 +1006,7 @@ export function ImportExportContent() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </span>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -1098,10 +1088,8 @@ export function ImportExportContent() {
       </p>
       
       <div className="flex justify-center">
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={contactUrl}
           className="group relative inline-flex items-center gap-3.5 overflow-hidden rounded-full px-14 py-5 text-[11px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-500 hover:scale-[1.03]"
           style={{
             background: 'linear-gradient(135deg, #c9a96e 0%, #b8860b 50%, #c9a96e 100%)',
@@ -1116,7 +1104,7 @@ export function ImportExportContent() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </span>
-        </a>
+        </Link>
       </div>
     </motion.div>
   </div>

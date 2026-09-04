@@ -7,7 +7,8 @@ import { CONTACT_CONFIG } from "@/lib/contact";
 
 interface FormData {
   fullName: string;
-  whatsapp: string;
+  email: string;
+  phone: string;
   expertise: string;
   passport: string;
   motivation?: string;
@@ -16,7 +17,8 @@ interface FormData {
 
 interface FormErrors {
   fullName?: string;
-  whatsapp?: string;
+  email?: string;
+  phone?: string;
   expertise?: string;
   passport?: string;
   motivation?: string;
@@ -40,9 +42,16 @@ const FORM_FIELDS = {
     autocomplete: "name",
     minLength: 2,
   },
-  whatsapp: {
-    id: "whatsapp",
-    label: "Numéro WhatsApp",
+  email: {
+    id: "email",
+    label: "Adresse Email",
+    type: "email",
+    placeholder: "Ex: jean.dupont@email.com",
+    autocomplete: "email",
+  },
+  phone: {
+    id: "phone",
+    label: "Numéro de téléphone / WhatsApp",
     type: "tel",
     placeholder: "Ex: +33 6 12 34 56 78",
     autocomplete: "tel",
@@ -109,8 +118,12 @@ const VALIDATION_MESSAGES = {
     required: "Veuillez indiquer votre nom complet",
     tooShort: "Le nom doit contenir au moins 2 caractères",
   },
-  whatsapp: {
-    required: "Numéro WhatsApp requis pour vous contacter",
+  email: {
+    required: "Adresse email requise pour vous contacter",
+    invalid: "Format d'adresse email invalide",
+  },
+  phone: {
+    required: "Numéro de téléphone requis pour le suivi",
     invalid: "Format invalide (ex: +33 6 12 34 56 78)",
   },
   expertise: {
@@ -124,15 +137,22 @@ const VALIDATION_MESSAGES = {
   },
 } as const;
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const VALIDATION_RULES = {
   fullName: (value: string): string | null => {
     if (!value.trim()) return VALIDATION_MESSAGES.fullName.required;
     if (value.trim().length < 2) return VALIDATION_MESSAGES.fullName.tooShort;
     return null;
   },
-  whatsapp: (value: string): string | null => {
-    if (!value.trim()) return VALIDATION_MESSAGES.whatsapp.required;
-    if (!FORM_FIELDS.whatsapp.pattern.test(value.trim())) return VALIDATION_MESSAGES.whatsapp.invalid;
+  email: (value: string): string | null => {
+    if (!value.trim()) return VALIDATION_MESSAGES.email.required;
+    if (!EMAIL_PATTERN.test(value.trim())) return VALIDATION_MESSAGES.email.invalid;
+    return null;
+  },
+  phone: (value: string): string | null => {
+    if (!value.trim()) return VALIDATION_MESSAGES.phone.required;
+    if (!FORM_FIELDS.phone.pattern.test(value.trim())) return VALIDATION_MESSAGES.phone.invalid;
     return null;
   },
   expertise: (value: string): string | null => {
@@ -171,7 +191,8 @@ function validateForm(data: FormData): FormErrors {
 function useApplicationForm() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
-    whatsapp: "",
+    email: "",
+    phone: "",
     expertise: "",
     passport: "",
   });
@@ -200,45 +221,55 @@ function useApplicationForm() {
 
     try {
       const domaineLabel = EXPERTISE_OPTIONS.find(opt => opt.value === formData.expertise)?.label || formData.expertise;
-      const passportLabel = formData.passport === "oui" ? "Oui" : "Non";
+      const passportLabel = formData.passport === "oui" ? "Oui — Passeport valide" : formData.passport === "en-cours" ? "En cours de renouvellement" : "Non";
       
-      const message = `📥 *NOUVELLE CANDIDATURE DUBAI*
+      const accessKey = CONTACT_CONFIG.web3FormsAccessKey;
 
-• *Nom complet :* ${formData.fullName}
-• *WhatsApp :* ${formData.whatsapp}
-• *Domaine recherché :* ${domaineLabel}
-• *Passeport valide :* ${passportLabel}
-• *Option choisie :* Paiement Échelonné (Acompte 500k)
+      if (accessKey && accessKey.trim() !== "") {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `Nouvelle Candidature Dubaï - ${formData.fullName} (${domaineLabel})`,
+            from_name: "Portail Emplois Dubaï",
+            name: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            domaine: domaineLabel,
+            passeport: passportLabel,
+            message: `Nouvelle candidature soumise sur emploisdubai.com :\n- Nom complet : ${formData.fullName}\n- Email : ${formData.email}\n- Téléphone / WhatsApp : ${formData.phone}\n- Domaine souhaité : ${domaineLabel}\n- Passeport : ${passportLabel}`,
+          }),
+        });
 
-Bonjour, je viens de voir vos opportunités sur la plateforme Emplois Dubaï et je souhaite être mis en relation avec des recruteurs partenaires.`;
-
-      const targetPhone = CONTACT_CONFIG.whatsappNumber
-        ? CONTACT_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')
-        : "";
-      
-      if (targetPhone) {
-        const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      }
-
-      await new Promise((resolve) => setTimeout(resolve, SUBMIT_DURATION));
-
-      if (process.env.NODE_ENV === "development") {
-        console.log("📋 Candidature soumise:", formData);
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Erreur lors de l'envoi de la candidature.");
+        }
+      } else {
+        // Mode démonstration / développement si la clé Web3Forms n'est pas encore saisie
+        if (process.env.NODE_ENV === "development") {
+          console.info("ℹ️ Web3Forms (Mode test) : Candidature simulée avec succès :", formData);
+        }
+        await new Promise((resolve) => setTimeout(resolve, SUBMIT_DURATION));
       }
 
       setSubmitState("success");
     } catch (error) {
       console.error("Erreur de soumission:", error);
       setSubmitState("error");
-      setTimeout(() => setSubmitState("idle"), 3000);
+      setTimeout(() => setSubmitState("idle"), 4000);
     }
   }, [formData]);
 
   const resetForm = useCallback(() => {
     setFormData({
       fullName: "",
-      whatsapp: "",
+      email: "",
+      phone: "",
       expertise: "",
       passport: "",
     });
@@ -526,7 +557,7 @@ function SuccessState({ onReset }: { onReset: () => void }) {
         Candidature <span className="text-gold-gradient">envoyée</span>
       </h3>
       <p className="mb-8 max-w-sm font-sans text-sm font-light leading-relaxed text-white/40">
-        Merci pour votre confiance. Notre équipe analysera votre profil sous {RESPONSE_DELAY}h et vous contactera via WhatsApp.
+        Merci pour votre confiance. Notre équipe analysera votre profil sous {RESPONSE_DELAY}h et vous contactera directement par email.
       </p>
 
       <div className="flex flex-col items-center gap-4">
@@ -566,7 +597,7 @@ function ErrorState({ onRetry }: { onRetry: () => void }) {
       </div>
       <h3 className="mb-2 font-serif text-xl font-semibold text-white">Erreur d&apos;envoi</h3>
       <p className="mb-6 max-w-sm font-sans text-sm font-light text-white/40">
-        Une erreur est survenue. Veuillez réessayer.
+        Une erreur est survenue lors de l&apos;envoi. Veuillez vérifier vos informations et réessayer.
       </p>
       <button
         type="button"
@@ -608,7 +639,7 @@ function SubmitButton({ state }: { state: SubmitState }) {
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" strokeDasharray="32" strokeLinecap="round" className="opacity-30" />
               <path d="M12 2a10 10 0 019.95 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-            Envoi en cours…
+            Transmission sécurisée…
           </motion.span>
         ) : (
           <motion.span
@@ -657,10 +688,10 @@ function ApplicationFormContent({
           noValidate
           exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.3 }}
-          className="space-y-8"
+          className="space-y-7"
           aria-label="Formulaire de candidature"
         >
-          <div className="grid gap-8 sm:grid-cols-2 sm:gap-6">
+          <div className="grid gap-6 sm:grid-cols-2">
             <FloatingInput
               id={FORM_FIELDS.fullName.id}
               label={FORM_FIELDS.fullName.label}
@@ -672,25 +703,27 @@ function ApplicationFormContent({
               onChange={(value) => updateField("fullName", value)}
             />
             <FloatingInput
-              id={FORM_FIELDS.whatsapp.id}
-              label={FORM_FIELDS.whatsapp.label}
-              type={FORM_FIELDS.whatsapp.type}
-              placeholder={FORM_FIELDS.whatsapp.placeholder}
-              autocomplete={FORM_FIELDS.whatsapp.autocomplete}
-              value={formData.whatsapp}
-              error={errors.whatsapp}
-              onChange={(value) => updateField("whatsapp", value)}
+              id={FORM_FIELDS.email.id}
+              label={FORM_FIELDS.email.label}
+              type={FORM_FIELDS.email.type}
+              placeholder={FORM_FIELDS.email.placeholder}
+              autocomplete={FORM_FIELDS.email.autocomplete}
+              value={formData.email}
+              error={errors.email}
+              onChange={(value) => updateField("email", value)}
             />
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 sm:gap-6">
-            <FloatingSelect
-              id={FORM_FIELDS.expertise.id}
-              label={FORM_FIELDS.expertise.label}
-              value={formData.expertise}
-              options={EXPERTISE_OPTIONS}
-              error={errors.expertise}
-              onChange={(value) => updateField("expertise", value)}
+          <div className="grid gap-6 sm:grid-cols-2">
+            <FloatingInput
+              id={FORM_FIELDS.phone.id}
+              label={FORM_FIELDS.phone.label}
+              type={FORM_FIELDS.phone.type}
+              placeholder={FORM_FIELDS.phone.placeholder}
+              autocomplete={FORM_FIELDS.phone.autocomplete}
+              value={formData.phone}
+              error={errors.phone}
+              onChange={(value) => updateField("phone", value)}
             />
             <FloatingSelect
               id={FORM_FIELDS.passport.id}
@@ -699,6 +732,17 @@ function ApplicationFormContent({
               options={PASSPORT_OPTIONS}
               error={errors.passport}
               onChange={(value) => updateField("passport", value)}
+            />
+          </div>
+
+          <div>
+            <FloatingSelect
+              id={FORM_FIELDS.expertise.id}
+              label={FORM_FIELDS.expertise.label}
+              value={formData.expertise}
+              options={EXPERTISE_OPTIONS}
+              error={errors.expertise}
+              onChange={(value) => updateField("expertise", value)}
             />
           </div>
 

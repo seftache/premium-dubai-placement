@@ -46,14 +46,14 @@ export default function ConfidentialitePage() {
           <section className="p-6 rounded-2xl border border-white/5 bg-white/[0.01]">
             <h2 className="text-lg font-serif font-semibold text-white mb-3">1. Collecte et Finalité des Données</h2>
             <p>
-              Emplois Dubaï accorde une importance primordiale à la confidentialité de vos informations. Les données collectées lors du dépôt de candidature (Nom complet, coordonnées WhatsApp, domaine de compétences recherché, statut du passeport) ont pour finalité exclusive d&apos;évaluer les profils et de permettre la mise en relation ciblée avec des employeurs et agences partenaires aux Émirats Arabes Unis.
+              Emplois Dubaï accorde une importance primordiale à la confidentialité de vos informations. Les données collectées lors du dépôt de candidature (Nom complet, adresse email, coordonnées téléphoniques, domaine de compétences recherché, statut du passeport) ont pour finalité exclusive d&apos;évaluer les profils et de permettre la mise en relation ciblée avec des employeurs et agences partenaires aux Émirats Arabes Unis.
             </p>
           </section>
 
           <section className="p-6 rounded-2xl border border-white/5 bg-white/[0.01]">
             <h2 className="text-lg font-serif font-semibold text-white mb-3">2. Modalités de Transmission</h2>
             <p>
-              Lorsque vous validez le formulaire de candidature, un récapitulatif structuré est généré pour vous permettre de transmettre directement vos éléments via messagerie instantanée sécurisée WhatsApp ou email à notre équipe de modération et d&apos;orientation. Vos échanges sont ainsi protégés par le chiffrement de bout en bout propre à la plateforme de messagerie.
+              Lorsque vous validez le formulaire de candidature, vos informations sont transmises de façon sécurisée par courrier électronique à notre équipe de modération et d&apos;orientation afin d&apos;assurer le traitement rapide de votre demande.
             </p>
           </section>
 
@@ -69,20 +69,17 @@ export default function ConfidentialitePage() {
             <p className="mb-4">
               Conformément à la réglementation applicable en matière de protection des données, vous disposez d&apos;un droit d&apos;accès, de rectification et d&apos;effacement des données vous concernant. Pour exercer ces droits, vous pouvez nous contacter à tout moment :
             </p>
-            {CONTACT_CONFIG.whatsappUrl ? (
-              <a 
-                href={CONTACT_CONFIG.whatsappUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <Link 
+                href="/candidature" 
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-brand-gold/40 text-brand-gold font-sans font-semibold text-xs tracking-wider uppercase hover:bg-brand-gold hover:text-black transition-all duration-300"
               >
-                Contacter le support ({CONTACT_CONFIG.whatsappNumber || CONTACT_CONFIG.phone})
-              </a>
-            ) : (
-              <p className="text-zinc-400">
-                Contact : {CONTACT_CONFIG.email || CONTACT_CONFIG.phone || "Via le formulaire en ligne"}
+                Formulaire de candidature en ligne
+              </Link>
+              <p className="text-zinc-400 self-center text-xs">
+                Email : <a href={`mailto:${CONTACT_CONFIG.email}`} className="text-brand-gold underline underline-offset-4">{CONTACT_CONFIG.email}</a>
               </p>
-            )}
+            </div>
           </section>
 
         </div>

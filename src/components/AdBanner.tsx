@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { CONTACT_CONFIG } from "@/lib/contact";
 
-const contactLink = CONTACT_CONFIG.whatsappUrl || "/candidature";
+const contactLink = "/candidature";
 
 const ads = [
   { src: "/images/pub-ethicalhacker.png", link: "https://ethicalhackerprep.com/" },

@@ -45,11 +45,7 @@ export default function UniverseDedicatedPage() {
     );
   }
 
-  const whatsappUrl = CONTACT_CONFIG.whatsappNumber
-    ? `https://wa.me/${CONTACT_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-        `Bonjour ${CONTACT_CONFIG.companyName}, je souhaite être mis en relation avec des partenaires commerciaux spécialisés concernant : ${data.subject}.`
-      )}`
-    : "/candidature";
+  const contactUrl = "/candidature";
 
   return (
     <main className="relative min-h-screen w-full bg-black overflow-hidden font-sans">
@@ -137,10 +133,8 @@ export default function UniverseDedicatedPage() {
           className="flex flex-col items-center gap-6 pointer-events-auto"
         >
           {/* CTA Button Minimaliste */}
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={contactUrl}
             className="group relative inline-flex items-center gap-4 px-8 py-4 sm:px-10 sm:py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-white transition-all duration-700 hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] active:scale-95"
           >
             <span className="text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase">
@@ -149,7 +143,7 @@ export default function UniverseDedicatedPage() {
             <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white/70 transition-transform duration-500 group-hover:translate-x-1.5 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </Link>
 
           {/* Mention légale de mise en relation */}
           <p className="max-w-md text-center text-[10px] text-white/40 leading-relaxed">
