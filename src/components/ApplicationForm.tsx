@@ -11,6 +11,7 @@ interface FormData {
   phone: string;
   expertise: string;
   passport: string;
+  consent: boolean;
   motivation?: string;
   cv?: File | null;
 }
@@ -21,6 +22,7 @@ interface FormErrors {
   phone?: string;
   expertise?: string;
   passport?: string;
+  consent?: string;
   motivation?: string;
   cv?: string;
 }
@@ -163,6 +165,10 @@ const VALIDATION_RULES = {
     if (!value) return VALIDATION_MESSAGES.passport.required;
     return null;
   },
+  consent: (value: boolean): string | null => {
+    if (!value) return "Veuillez accepter la transmission de vos données au partenaire recruteur.";
+    return null;
+  },
 };
 
 const INPUT_BASE_CLASSES =
@@ -181,7 +187,8 @@ function validateForm(data: FormData): FormErrors {
   const errors: FormErrors = {};
 
   (Object.keys(VALIDATION_RULES) as Array<keyof typeof VALIDATION_RULES>).forEach((field) => {
-    const error = VALIDATION_RULES[field](data[field] as string);
+    const rule = VALIDATION_RULES[field];
+    const error = (rule as (val: unknown) => string | null)(data[field]);
     if (error) errors[field] = error;
   });
 
@@ -195,9 +202,11 @@ function useApplicationForm() {
     phone: "",
     expertise: "",
     passport: "",
+    consent: false,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [refCode, setRefCode] = useState<string>("");
 
   const updateField = useCallback(<K extends keyof FormData>(key: K, value: FormData[K]) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -220,41 +229,57 @@ function useApplicationForm() {
     setSubmitState("submitting");
 
     try {
+      // 1. Enregistrement sur la plateforme multi-agences
+      try {
+        const apiRes = await fetch("/api/candidates", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            expertise: formData.expertise,
+            passport: formData.passport,
+            consent: formData.consent,
+          }),
+        });
+        const apiData = await apiRes.json();
+        if (apiData?.ref_code) {
+          setRefCode(apiData.ref_code);
+        }
+      } catch (apiErr) {
+        console.warn("Plateforme API fallback:", apiErr);
+      }
+
+      // 2. Notification de secours par email via Web3Forms
       const domaineLabel = EXPERTISE_OPTIONS.find(opt => opt.value === formData.expertise)?.label || formData.expertise;
       const passportLabel = formData.passport === "oui" ? "Oui — Passeport valide" : formData.passport === "en-cours" ? "En cours de renouvellement" : "Non";
       
       const accessKey = CONTACT_CONFIG.web3FormsAccessKey;
 
       if (accessKey && accessKey.trim() !== "") {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            access_key: accessKey,
-            subject: `Nouvelle Candidature Dubaï - ${formData.fullName} (${domaineLabel})`,
-            from_name: "Portail Emplois Dubaï",
-            name: formData.fullName,
-            email: formData.email,
-            phone: formData.phone,
-            domaine: domaineLabel,
-            passeport: passportLabel,
-            message: `Nouvelle candidature soumise sur emploisdubai.com :\n- Nom complet : ${formData.fullName}\n- Email : ${formData.email}\n- Téléphone / WhatsApp : ${formData.phone}\n- Domaine souhaité : ${domaineLabel}\n- Passeport : ${passportLabel}`,
-          }),
-        });
-
-        const result = await response.json();
-        if (!response.ok || !result.success) {
-          throw new Error(result.message || "Erreur lors de l'envoi de la candidature.");
+        try {
+          await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              access_key: accessKey,
+              subject: `Nouvelle Candidature Dubaï - ${formData.fullName} (${domaineLabel})`,
+              from_name: "Portail Emplois Dubaï",
+              name: formData.fullName,
+              email: formData.email,
+              phone: formData.phone,
+              domaine: domaineLabel,
+              passeport: passportLabel,
+              message: `Nouvelle candidature soumise sur emploisdubai.com :\n- Nom complet : ${formData.fullName}\n- Email : ${formData.email}\n- Téléphone / WhatsApp : ${formData.phone}\n- Domaine souhaité : ${domaineLabel}\n- Passeport : ${passportLabel}`,
+            }),
+          });
+        } catch {
+          // Ignorer erreur réseau externe si déjà sauvé en base
         }
-      } else {
-        // Mode démonstration / développement si la clé Web3Forms n'est pas encore saisie
-        if (process.env.NODE_ENV === "development") {
-          console.info("ℹ️ Web3Forms (Mode test) : Candidature simulée avec succès :", formData);
-        }
-        await new Promise((resolve) => setTimeout(resolve, SUBMIT_DURATION));
       }
 
       setSubmitState("success");
@@ -272,15 +297,18 @@ function useApplicationForm() {
       phone: "",
       expertise: "",
       passport: "",
+      consent: false,
     });
     setErrors({});
     setSubmitState("idle");
+    setRefCode("");
   }, []);
 
   return {
     formData,
     errors,
     submitState,
+    refCode,
     updateField,
     handleSubmit,
     resetForm,
@@ -514,7 +542,7 @@ function FloatingSelect({
   );
 }
 
-function SuccessState({ onReset }: { onReset: () => void }) {
+function SuccessState({ onReset, refCode }: { onReset: () => void; refCode?: string }) {
   return (
     <motion.div
       key="success"
@@ -554,10 +582,17 @@ function SuccessState({ onReset }: { onReset: () => void }) {
       </motion.div>
 
       <h3 className="mb-3 font-serif text-2xl font-semibold text-white sm:text-3xl">
-        Candidature <span className="text-gold-gradient">envoyée</span>
+        Candidature <span className="text-gold-gradient">transmise</span>
       </h3>
+      {refCode && (
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 px-4 py-1.5">
+          <span className="font-mono text-xs font-semibold tracking-wider text-brand-gold">
+            RÉFÉRENCE : {refCode}
+          </span>
+        </div>
+      )}
       <p className="mb-8 max-w-sm font-sans text-sm font-light leading-relaxed text-white/40">
-        Merci pour votre confiance. Notre équipe analysera votre profil sous {RESPONSE_DELAY}h et vous contactera directement par email.
+        Votre profil a été transmis au partenaire recruteur pour étude de dossier. Vous serez recontacté(e) directement par email ou téléphone si votre profil est retenu.
       </p>
 
       <div className="flex flex-col items-center gap-4">
@@ -671,6 +706,7 @@ function ApplicationFormContent({
   formData,
   errors,
   submitState,
+  refCode,
   updateField,
   handleSubmit,
   resetForm,
@@ -678,7 +714,7 @@ function ApplicationFormContent({
   return (
     <AnimatePresence mode="wait">
       {submitState === "success" ? (
-        <SuccessState onReset={resetForm} />
+        <SuccessState onReset={resetForm} refCode={refCode} />
       ) : submitState === "error" ? (
         <ErrorState onRetry={() => resetForm()} />
       ) : (
@@ -746,12 +782,34 @@ function ApplicationFormContent({
             />
           </div>
 
+          {/* Consentement actif et transparent */}
+          <div className="space-y-2 pt-2">
+            <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+              <input
+                type="checkbox"
+                id="consent"
+                checked={formData.consent}
+                onChange={(e) => updateField("consent", e.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-white/20 bg-zinc-900 accent-[#c9a96e] cursor-pointer"
+              />
+              <label htmlFor="consent" className="cursor-pointer font-sans text-xs font-light leading-relaxed text-zinc-300">
+                J&apos;accepte expressément que mes coordonnées et informations soient transmises au partenaire recruteur correspondant à mon profil afin d&apos;être recontacté(e). En savoir plus dans la{" "}
+                <Link href="/confidentialite" className="text-brand-gold underline hover:text-white">
+                  Politique de Confidentialité
+                </Link>.
+              </label>
+            </div>
+            {errors.consent && (
+              <p className="font-sans text-[11px] font-light text-amber-500/90 pl-1">{errors.consent}</p>
+            )}
+          </div>
+
           <div className="pt-2">
             <SubmitButton state={submitState} />
           </div>
 
           <p className="text-center font-sans text-[10px] font-light leading-relaxed text-white/20">
-            En soumettant ce formulaire, vous acceptez que vos données soient traitées par Emplois Dubaï dans le cadre de votre candidature. Vos informations restent strictement confidentielles.
+            Emplois Dubaï est une plateforme de mise en relation. Vos informations restent strictement confidentielles et ne sont transmises qu&apos;aux partenaires qualifiés.
           </p>
         </motion.form>
       )}

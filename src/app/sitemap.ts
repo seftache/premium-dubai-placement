@@ -14,6 +14,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           fr: baseUrl,
           'fr-FR': baseUrl,
+          en: `${baseUrl}/en`,
+          'x-default': baseUrl,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/en`,
+      lastModified: today,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+      alternates: {
+        languages: {
+          fr: baseUrl,
+          en: `${baseUrl}/en`,
+          'x-default': baseUrl,
         },
       },
     },

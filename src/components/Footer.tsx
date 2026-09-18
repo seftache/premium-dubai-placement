@@ -53,6 +53,16 @@ export function Footer() {
                   Postuler
                 </Link>
               </li>
+              <li>
+                <Link href="/partner/dashboard" className="text-sm text-brand-gold/80 hover:text-brand-gold font-medium transition-colors duration-300">
+                  Espace Agences Partenaires
+                </Link>
+              </li>
+              <li>
+                <Link href="/en" className="text-sm text-zinc-400 hover:text-white transition-colors duration-300">
+                  English Version (EN)
+                </Link>
+              </li>
             </ul>
           </div>
 
