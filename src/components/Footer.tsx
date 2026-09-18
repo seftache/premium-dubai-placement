@@ -109,10 +109,10 @@ export function Footer() {
             <p className="text-[10px] text-white/30 font-light tracking-wider">
               &copy; {new Date().getFullYear()} Emplois Dubaï. Tous droits réservés.
             </p>
-            {/* SEO Stealth Links */}
-            <div className="flex gap-4 text-[9px] text-white/10 uppercase tracking-widest">
-              <Link href="/guides/emploi-serveur-dubai" className="hover:text-white/30 transition-colors">Emploi Serveur</Link>
-              <Link href="/guides/visa-travail-dubai" className="hover:text-white/30 transition-colors">Visa Dubaï</Link>
+            {/* Guide Links */}
+            <div className="flex gap-4 text-[9px] text-zinc-500 uppercase tracking-widest">
+              <Link href="/guides/emploi-serveur-dubai" className="hover:text-zinc-300 transition-colors">Emploi Serveur</Link>
+              <Link href="/guides/visa-travail-dubai" className="hover:text-zinc-300 transition-colors">Visa Dubaï</Link>
             </div>
           </div>
           <p className="text-[10px] text-white/30 font-light tracking-wider">

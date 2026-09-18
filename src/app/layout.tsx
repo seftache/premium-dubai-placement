@@ -97,84 +97,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // 1. JSON-LD EmploymentAgency Schema
-  const jsonLdAgency = {
-    "@context": "https://schema.org",
-    "@type": "EmploymentAgency",
-    "@id": "https://emploisdubai.com/#agency",
-    name: "Emplois Dubaï",
-    alternateName: ["Emplois Dubai", "Portail Emplois Dubaï", "Mise en Relation Dubaï"],
-    url: "https://emploisdubai.com",
-    logo: "https://emploisdubai.com/favicon.ico",
-    image: "https://emploisdubai.com/hero-dubai-night.jpg",
-    description:
-      "Portail leader de mise en relation et d'opportunités d'emploi à Dubaï (Émirats Arabes Unis). Mise en relation ciblée entre candidats et recruteurs partenaires vérifiés.",
-    priceRange: "€€€",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Dubaï Marina",
-      addressRegion: "Dubaï",
-      addressCountry: "AE",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 25.0772,
-      longitude: 55.1330,
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: CONTACT_CONFIG.phone || "+971-4-000-0000",
-      contactType: "Support & Mise en relation",
-      availableLanguage: ["French", "English", "Arabic"],
-      areaServed: ["FR", "BE", "CH", "CA", "CI", "SN", "CM", "AE"],
-    },
-    sameAs: [
-      "https://www.linkedin.com/company/emplois-dubai",
-      "https://twitter.com/EmploisDubai",
-      "https://www.facebook.com/EmploisDubai",
-      "https://www.instagram.com/EmploisDubai",
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Secteurs d'Opportunités à Dubaï",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Mise en relation Chauffeur Privé VIP Dubaï",
-            description: "Opportunités et mise en relation pour chauffeurs privés et VIP à Dubaï.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Mise en relation Hôtellerie & Restauration Dubaï",
-            description: "Opportunités ciblées dans la restauration et l'hôtellerie à Dubaï.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Mise en relation Sécurité & Vigilance Dubaï",
-            description: "Mise en contact pour postes de sécurité et surveillance à Dubaï.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Mise en relation Import-Export & Logistique Dubaï",
-            description: "Mise en relation avec des partenaires commerciaux et logistiques aux Émirats.",
-          },
-        },
-      ],
-    },
-  };
-
-  // 2. JSON-LD WebSite Schema with SearchAction
+  // 1. JSON-LD WebSite Schema with SearchAction
   const jsonLdWebSite = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -189,55 +112,7 @@ export default function RootLayout({
     },
   };
 
-  // 3. JSON-LD FAQ Schema for Google Rich Snippets
-  const jsonLdFAQ = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Comment fonctionne la mise en relation avec Emplois Dubaï ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Pour accéder aux opportunités à Dubaï, il vous suffit de remplir notre formulaire de mise en relation en ligne. Notre équipe transmet votre profil à des recruteurs partenaires aux Émirats Arabes Unis.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Comment sont gérés les visas de travail et de résidence à Dubaï ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Les visas de travail et permis de résidence sont traités et pris en charge directement par les employeurs partenaires selon la réglementation officielle du Ministère du Travail (MOHRE) des Émirats Arabes Unis.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Des options de logement sont-elles proposées par les employeurs à Dubaï ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "De nombreuses offres de nos employeurs partenaires incluent des options de logement ou des indemnités d'hébergement. Les conditions exactes sont communiquées directement par l'employeur recruteur.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Quels sont les secteurs d'activité qui recrutent à Dubaï ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Les principaux secteurs avec de fortes opportunités à Dubaï sont : les chauffeurs privés VIP, l'hôtellerie et la restauration de luxe, la sécurité, l'import-export et logistique, les métiers du BTP, ainsi que le personnel de maison.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Faut-il parler couramment anglais pour travailler à Dubaï ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Des notions d'anglais sont un atout, mais nos partenaires proposent également des postes accessibles aux francophones avec un accompagnement adapté.",
-        },
-      },
-    ],
-  };
-
-  // 4. JSON-LD BreadcrumbList Schema
+  // 2. JSON-LD BreadcrumbList Schema
   const jsonLdBreadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -290,25 +165,11 @@ export default function RootLayout({
 
         {/* JSON-LD Schemas pour Google Search Engine */}
         <Script
-          id="schema-agency"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(jsonLdAgency)}
-        </Script>
-        <Script
           id="schema-website"
           type="application/ld+json"
           strategy="afterInteractive"
         >
           {JSON.stringify(jsonLdWebSite)}
-        </Script>
-        <Script
-          id="schema-faq"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(jsonLdFAQ)}
         </Script>
         <Script
           id="schema-breadcrumb"

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://emploisdubai.com';
-  const today = new Date().toISOString();
+  const today = '2026-09-18';
 
   return [
     {
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/services`,
       lastModified: today,
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
       alternates: {
         languages: {
@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/candidature`,
       lastModified: today,
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
       alternates: {
         languages: {
@@ -44,12 +44,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/import-export`,
       lastModified: today,
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
       alternates: {
         languages: {
           fr: `${baseUrl}/import-export`,
           'fr-FR': `${baseUrl}/import-export`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/conditions-generales`,
+      lastModified: today,
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+      alternates: {
+        languages: {
+          fr: `${baseUrl}/conditions-generales`,
+          'fr-FR': `${baseUrl}/conditions-generales`,
         },
       },
     },

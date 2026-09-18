@@ -35,7 +35,7 @@ export function JobPostingSchema({ data }: { data: any }) {
           "employmentType": data.employmentType || "FULL_TIME",
           "hiringOrganization": {
             "@type": "Organization",
-            "name": data.hiringOrganization || "Emplois Dubaï",
+            "name": data.hiringOrganization || "Recruteur Partenaire",
             "sameAs": "https://emploisdubai.com"
           },
           "jobLocation": {
@@ -81,7 +81,7 @@ export function LocalBusinessSchema() {
             "addressCountry": "AE"
           },
           "priceRange": "$$$",
-          "telephone": CONTACT_CONFIG.phone || "+971-4-000-0000"
+          ...(CONTACT_CONFIG.phone ? { "telephone": CONTACT_CONFIG.phone } : {})
         })
       }}
     />

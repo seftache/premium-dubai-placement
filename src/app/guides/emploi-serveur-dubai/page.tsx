@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { 
   FAQSchema, 
   JobPostingSchema, 
@@ -32,27 +30,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: "Emplois Dubaï",
-    images: [
-      {
-        url: "/images/serveur-dubai-og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Emploi serveur Dubaï - Recrutement 2026",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Serveur à Dubaï 2026 | Salaire 8000 AED + Logement",
-    description: "147 offres disponibles. Postulez gratuitement pour travailler à Dubaï.",
-    images: ["/images/serveur-dubai-twitter.jpg"],
+    description: "Postulez gratuitement pour travailler à Dubaï.",
   },
   alternates: {
-    canonical: "https://emplois-dubai.com/metiers/serveur-dubai",
+    canonical: "https://emploisdubai.com/guides/emploi-serveur-dubai",
     languages: {
-      'fr': "https://emplois-dubai.com/fr/metiers/serveur-dubai",
-      'fr-FR': "https://emplois-dubai.com/fr-fr/metiers/serveur-dubai",
-      'en': "https://emplois-dubai.com/en/jobs/waiter-dubai",
+      'fr': "https://emploisdubai.com/guides/emploi-serveur-dubai",
+      'fr-FR': "https://emploisdubai.com/guides/emploi-serveur-dubai",
     },
   },
   robots: {
@@ -66,12 +54,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "votre-code-google-search-console",
-  },
   category: "emploi",
   classification: "recrutement international",
-  authors: [{ name: "Emplois Dubaï", url: "https://emplois-dubai.com/about" }],
+  authors: [{ name: "Emplois Dubaï", url: "https://emploisdubai.com/about" }],
   publisher: "Emplois Dubaï",
 };
 
@@ -100,7 +85,7 @@ export default function ServeurDubaiPage() {
     },
     {
       question: "Puis-je travailler comme serveur à Dubaï sans expérience ?",
-      answer: "Oui, mais les meilleurs salaires sont pour les profils expérimentés (min 1-2 ans). Les débutants commencent comme commis de salle ou runner avec un salaire de 2500-3500 AED. Emplois Dubaï propose des formations accélérées pour les profils motivés.",
+      answer: "Oui, mais les meilleurs salaires sont pour les profils expérimentés (min 1-2 ans). Les débutants commencent comme commis de salle ou runner avec un salaire de 2500-3500 AED. Nos partenaires peuvent proposer des formations pour les profils motivés.",
       upvotes: 32
     },
     {
@@ -110,42 +95,13 @@ export default function ServeurDubaiPage() {
     },
     {
       question: "Quand est la meilleure période pour postuler ?",
-      answer: "Les meilleures périodes : Septembre à Novembre (avant haute saison), Janvier à Mars (après les soldes d'été). Évitez Juin-Août (chaleur extrême, sauf hôtels climatisés). Actuellement : 147 offres urgentes.",
+      answer: "Les meilleures périodes : Septembre à Novembre (avant haute saison), Janvier à Mars (après les soldes d'été). Évitez Juin-Août (chaleur extrême, sauf hôtels climatisés).",
       upvotes: 28
     },
     {
       question: "Combien de temps pour obtenir le visa travail ?",
-      answer: "Délai total : 3-4 semaines. Détail : Offre d'emploi (1 sem), Visa entrée (2 sem), Arrivée Dubaï + visites médicales (3-5 jours), Emirates ID (1-2 sem). Emplois Dubaï accélère le processus avec nos partenaires.",
+      answer: "Délai total : 3-4 semaines. Détail : Offre d'emploi (1 sem), Visa entrée (2 sem), Arrivée Dubaï + visites médicales (3-5 jours), Emirates ID (1-2 sem). Nous facilitons la mise en relation avec nos partenaires.",
       upvotes: 56
-    }
-  ];
-
-  // Statistiques dynamiques
-  const stats = {
-    totalJobs: 147,
-    todayJobs: 12,
-    avgSalary: 6500,
-    placementRate: 94,
-    avgTimeToHire: 15
-  };
-
-  // Avis clients authentiques
-  const testimonials = [
-    {
-      name: "Thomas M.",
-      role: "Serveur - Burj Al Arab",
-      date: "2026-01-15",
-      rating: 5,
-      content: "Emplois Dubaï m'a trouvé un poste en 2 semaines. Salaire 7000 AED + logement de luxe. Incroyable !",
-      avatar: "/avatars/thomas.jpg"
-    },
-    {
-      name: "Sophie L.",
-      role: "Serveuse - La Petite Maison",
-      date: "2025-12-10",
-      rating: 5,
-      content: "Accompagnement parfait du début à la fin. Visa obtenu en 3 semaines. Je recommande à 1000% !",
-      avatar: "/avatars/sophie.jpg"
     }
   ];
 
@@ -154,9 +110,9 @@ export default function ServeurDubaiPage() {
       {/* Tous les schémas JSON-LD */}
       <BreadcrumbSchema
         items={[
-          { name: "Accueil", item: "https://emplois-dubai.com/" },
-          { name: "Guides", item: "https://emplois-dubai.com/guides" },
-          { name: "Serveur Dubaï", item: "https://emplois-dubai.com/guides/emploi-serveur-dubai" },
+          { name: "Accueil", item: "https://emploisdubai.com/" },
+          { name: "Guides", item: "https://emploisdubai.com/guides" },
+          { name: "Serveur Dubaï", item: "https://emploisdubai.com/guides/emploi-serveur-dubai" },
         ]}
       />
       <LocalBusinessSchema />
@@ -165,7 +121,6 @@ export default function ServeurDubaiPage() {
       <JobPostingSchema data={jobPostingData} />
       
       <div className="min-h-screen bg-gradient-to-b from-brand-black via-zinc-900 to-brand-black text-white">
-        <Navbar />
         
         {/* Barre de progression de lecture (SEO + UX) */}
         <ReadingProgressBar />
@@ -178,38 +133,29 @@ export default function ServeurDubaiPage() {
               <TrustBadges />
             </div>
 
-            {/* Badges d'urgence dynamiques */}
+            {/* Badges de confiance */}
             <div className="flex flex-wrap gap-3 mb-6">
-              <span className="inline-flex items-center gap-2 bg-red-500/20 text-red-400 px-4 py-1 rounded-full text-sm font-semibold animate-pulse">
-                🔴 {stats.todayJobs} offres ajoutées aujourd'hui
-              </span>
               <span className="inline-flex items-center gap-2 bg-brand-gold/20 text-brand-gold px-4 py-1 rounded-full text-sm font-semibold">
-                ⚡ Placement sous {stats.avgTimeToHire} jours
-              </span>
-              <span className="inline-flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-1 rounded-full text-sm font-semibold">
-                ✅ {stats.placementRate}% de réussite
+                ⚡ Mise en relation rapide
               </span>
             </div>
 
-            {/* Titre H1 avec compteur */}
+            {/* Titre H1 */}
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Serveur à Dubaï 2026
               <span className="text-brand-gold block text-2xl md:text-3xl mt-3">
-                🔥 {stats.totalJobs} offres disponibles • Salaire jusqu'à 8 000 AED
+                🔥 Salaire attractif selon expérience
               </span>
             </h1>
 
             {/* Sous-titre SEO-friendly */}
             <p className="text-xl text-zinc-300 mb-8 max-w-3xl">
-              Découvrez les <strong className="text-brand-gold">opportunités de serveur à Dubaï</strong> avec options de logement et visa gérés par les employeurs partenaires. 
+              Découvrez les <strong className="text-brand-gold">opportunités de serveur à Dubaï</strong> avec options de logement et visa qui peuvent être gérés par les employeurs partenaires. 
               Mise en relation pour la saison 2026.
             </p>
 
             {/* CTA sticky amélioré */}
             <StickyCTA />
-
-            {/* Section statistiques animées */}
-            <AnimatedStats stats={stats} />
 
             {/* Contenu principal avec structure améliorée */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
@@ -229,9 +175,7 @@ export default function ServeurDubaiPage() {
                   {/* Processus visa avec timeline */}
                   <VisaTimeline />
                   
-                  {/* Témoignages avec photos */}
-                  <SuccessStories testimonials={testimonials} />
-                  
+
                   {/* FAQ enrichie avec votes */}
                   <EnhancedFAQ faqData={faqData} />
                   
@@ -274,9 +218,8 @@ export default function ServeurDubaiPage() {
             <FinalCTA />
           </div>
         </main>
-        
-        <Footer />
-        
+
+
         {/* Popup sortie (exit intent) */}
         <ExitIntentPopup />
       </div>
@@ -381,44 +324,13 @@ function JobAlertForm({ jobType }: { jobType: string }) {
       <p className="text-sm text-zinc-400 mb-4">
         Recevez les nouvelles offres de serveur à Dubaï directement par email.
       </p>
-      <form className="space-y-4">
-        <input
-          type="email"
-          placeholder="Votre email"
-          className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-white outline-none focus:border-brand-gold"
-        />
-        <button
-          type="submit"
-          className="w-full rounded-xl bg-brand-gold px-4 py-3 font-semibold text-brand-black"
-        >
-          Je m'inscris
-        </button>
-      </form>
+      <Link
+        href="/candidature"
+        className="block w-full text-center rounded-xl bg-brand-gold px-4 py-3 font-semibold text-brand-black"
+      >
+        S'inscrire aux alertes
+      </Link>
     </div>
-  );
-}
-
-function SuccessStories({ testimonials }: { testimonials: Array<{name:string; role:string; date:string; rating:number; content:string; avatar:string}> }) {
-  return (
-    <section className="space-y-6">
-      <h2 className="text-2xl font-bold mb-4">Témoignages clients</h2>
-      <div className="grid gap-4">
-        {testimonials.map((item) => (
-          <article key={item.name} className="rounded-3xl border border-white/10 bg-zinc-950/70 p-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center text-sm uppercase text-white/70">
-                {item.name.slice(0, 1)}
-              </div>
-              <div>
-                <p className="font-semibold">{item.name}</p>
-                <p className="text-sm text-zinc-400">{item.role} · {item.date}</p>
-              </div>
-            </div>
-            <p className="text-sm text-zinc-300">{item.content}</p>
-          </article>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -447,9 +359,9 @@ function BenefitsDetailedList() {
     <div className="bg-zinc-950/80 rounded-3xl border border-white/10 p-6 mb-8">
       <h3 className="text-xl font-bold mb-4">Avantages clés</h3>
       <ul className="space-y-3 text-sm text-zinc-300">
-        <li>• Logement et transport assurés par l'employeur</li>
+        <li>• Logement et transport peuvent être proposés par l'employeur selon le poste</li>
         <li>• Salaire net défiscalisé jusqu'à 8 000 AED</li>
-        <li>• Formation rapide pour les profils expérimentés</li>
+        <li>• Formations possibles via nos partenaires pour les profils motivés</li>
         <li>• Assistance visa et arrivée Dubaï</li>
       </ul>
     </div>
@@ -583,7 +495,7 @@ function FinalCTA() {
   return (
     <section className="rounded-[2rem] border border-white/10 bg-gradient-to-r from-brand-gold/10 to-zinc-950 p-10 text-center mt-10">
       <h2 className="text-3xl font-bold mb-4">Prêt à commencer votre carrière à Dubaï ?</h2>
-      <p className="text-sm text-zinc-300 mb-6">Postulez aujourd'hui et recevez une offre validée en moins de 15 jours.</p>
+      <p className="text-sm text-zinc-300 mb-6">Postulez aujourd'hui pour être mis en relation avec nos partenaires locaux.</p>
       <Link href="/candidature" className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-4 font-semibold text-brand-black">
         Postuler maintenant
       </Link>
